@@ -34,7 +34,7 @@
                 <p> Devices currently in use:
                     {% for pin in pins %}
                     {% if pins[pin].state == true %}
-                    {{% msg = pins[pin].name %}}
+                    {% msg = pins[pin].name %}
                     {% endif %}
                     {% endfor %}
 
