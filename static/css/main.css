@@ -18,6 +18,8 @@ body{
 .device_list{
     width: 25%;
     /*background-color: red;*/
+    border-style: solid;
+    border-color: black;
 }
 
 .spacer{
@@ -28,14 +30,6 @@ body{
 .smart_meter{
     width: 70%;
     /*background-color: coral;*/
-    border-style: solid;
-    border-color: black;
-}
-
-.display {
-    width: 80%;
-    height: 80%;
-    margin: 5%;
     border-style: solid;
     border-color: black;
 }
