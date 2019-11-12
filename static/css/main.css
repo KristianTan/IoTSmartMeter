@@ -22,13 +22,10 @@ body{
     border-color: black;
 }
 
-.spacer{
-    width: 5%;
-    /*background-color: green;*/
-}
-
 .smart_meter{
-    width: 70%;
+    width: 65%;
+    margin-right: 5%;
+    margin-left: 5%;
     /*background-color: coral;*/
     border-style: solid;
     border-color: black;
