@@ -18,7 +18,7 @@ body{
 .device_list{
     width: 25%;
     /*background-color: red;*/
-    border-style: solid;
+    border-right-style: solid;
     border-color: black;
     border-width: 1px;
 }
@@ -30,4 +30,5 @@ body{
     /*background-color: coral;*/
     border-style: solid;
     border-color: black;
+    border-width: 1px;
 }
