@@ -32,16 +32,17 @@
         <div class="smart_meter">
             <div class="smart_meter_info">
                 <p> Devices currently in use:
+                    {% msg = "" %}
                     {% for pin in pins %}
                     {% if pins[pin].state == true %}
-                    {{ pins[pin].name }}
+                    {{% msg = pins[pin].name %}}
                     {% endif %}
                     {% endfor %}
 
                     {% if pins|length == 0 %}
-                    No devices currently in use.
+                        {{% msg = No devices currently in use. %}}
                     {% endif %}
-
+                    {{ msg }}
                 </p>
 
                 <p> Used today:
