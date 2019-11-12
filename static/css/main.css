@@ -15,20 +15,20 @@ body{
     height: 100%;
 }
 
-.device_list{
-    width: 25%;
-    background-color: red;
-}
+/*.device_list{*/
+/*    width: 25%;*/
+/*    background-color: red;*/
+/*}*/
 
-.spacer{
-    width: 5%;
-    background-color: green;
-}
+/*.spacer{*/
+/*    width: 5%;*/
+/*    background-color: green;*/
+/*}*/
 
-.smart_meter{
-    width: 70%;
-    background-color: coral;
-}
+/*.smart_meter{*/
+/*    width: 70%;*/
+/*    background-color: coral;*/
+/*}*/
 
 .display {
     width: 80%;
