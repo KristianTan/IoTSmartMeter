@@ -32,6 +32,8 @@ def main():
 # The function below is executed when someone requests a URL with the pin number and action in it:
 @app.route("/<change_pin>")
 def action(change_pin):
+    if change_pin == 'favicon.ico':
+        return "here"
     change_pin = int(change_pin)
     device_name = pins[change_pin]['name']
     print("Input value before change: " + str(GPIO.input(change_pin)))
