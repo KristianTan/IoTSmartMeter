@@ -1,16 +1,15 @@
 from flask import Flask, render_template
-# import datetime
 import RPi.GPIO as GPIO
 
 app = Flask(__name__)
 GPIO.setmode(GPIO.BCM)
 
-# Create a dictionary called pins to store the pin number, name, and pin state:
+# Create dictionary to store pin info
 pins = {
     25: {'name': 'Light', 'state': GPIO.LOW}
 }
-#
-# Set each pin as an output and make it low:
+
+# Setup each pin
 for pin in pins:
     GPIO.setup(pin, GPIO.OUT)
     GPIO.output(pin, GPIO.LOW)
@@ -21,30 +20,24 @@ def main():
     # For each pin, read the pin state and store it in the pins dictionary:
     for pin in pins:
         pins[pin]['state'] = GPIO.input(pin)
-    # Put the pin dictionary into the template data dictionary:
+
+    # Set the template data for the HTML template
     template_data = {
         'pins': pins
     }
-    # Pass the template data into the template main.html and return it to the user
+
     return render_template('main.html', **template_data)
 
 
-# The function below is executed when someone requests a URL with the pin number and action in it:
-@app.route("/<change_pin>")
-def action(change_pin):
+@app.route("/<pin>")
+def toggle_pin(change_pin):
     if change_pin == 'favicon.ico':
-        return "here"
+        pass
+
     change_pin = int(change_pin)
     device_name = pins[change_pin]['name']
-    print("Input value before change: " + str(GPIO.input(change_pin)))
 
-    # if action == "on":
-    #     GPIO.output(change_pin, GPIO.HIGH)
-    #     message = "Turned " + device_name + " on."
-    # if action == "off":
-    #     GPIO.output(change_pin, GPIO.LOW)
-    #     message = "Turned " + device_name + " off."
-    # if action == "toggle":
+    # Toggle the selected pin
     GPIO.output(change_pin, not GPIO.input(change_pin))
 
     message = "Turned " + device_name
@@ -55,7 +48,6 @@ def action(change_pin):
 
     for pin in pins:
         pins[pin]['state'] = GPIO.input(pin)
-    print("Input value after change: " + str(GPIO.input(change_pin)))
 
     template_data = {
         'message': message,
@@ -63,11 +55,6 @@ def action(change_pin):
     }
 
     return render_template('main.html', **template_data)
-
-
-@app.route('/button')
-def button():
-    print("Button press")
 
 
 if __name__ == '__main__':
