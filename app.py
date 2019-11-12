@@ -1,19 +1,25 @@
 from flask import Flask, render_template
 import RPi.GPIO as GPIO
 from flask_sqlalchemy import SQLAlchemy
+from .daily_usage import DailyUsage
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///energyUsage'
 db = SQLAlchemy(app)
+SQLAlchemy.create_all()
 db.create_all()
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
+test = DailyUsage("12/11/2019", 5)
+db.session.add(test)
+db.session.commit()
 
 # Create dictionary to store pin info
 pins = {
     25: {'name': 'Light', 'state': GPIO.LOW}
 }
+
 
 # Setup each pin
 for pin in pins:
