@@ -29,7 +29,7 @@ def main():
     return render_template('main.html', **template_data)
 
 
-@app.route("/<pin>")
+@app.route("/<change_pin>")
 def toggle_pin(change_pin):
     if change_pin == 'favicon.ico':
         pass
