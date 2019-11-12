@@ -33,4 +33,6 @@ body{
     width: 80%;
     height: 80%;
     padding: 5%;
+    border-style: solid;
+    border-color: black;
 }
