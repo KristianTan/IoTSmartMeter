@@ -38,7 +38,7 @@
                     {% endif %}
                     {% endfor %}
 
-                    {% if pins %}
+                    {% if pins|length == 0 %}
                     No devices currently in use.
                     {% endif %}
 
