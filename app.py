@@ -3,7 +3,7 @@ import RPi.GPIO as GPIO
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 import os
-import daily_usage
+from daily_usage import DailyUsage
 
 app = Flask(__name__)
 os.environ['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///energyUsage'
@@ -17,9 +17,7 @@ db.create_all()
 
 engine = create_engine(os.environ['SQLALCHEMY_DATABASE_URI'])
 
-daily_usage.DailyUsage.metadata.createall(engine)
-
-test = daily_usage.DailyUsage("12/11/2019", 5)
+test = DailyUsage("12/11/2019", 5)
 db.session.add(test)
 db.session.commit()
 
