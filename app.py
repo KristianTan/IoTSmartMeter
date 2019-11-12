@@ -37,6 +37,7 @@ def main():
 
 @app.route("/<change_pin>")
 def toggle_pin(change_pin):
+    # TODO: change_pin is somethimes favicon.co for some reason? Fix
     if change_pin == 'favicon.ico':
         pass
 

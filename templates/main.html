@@ -23,6 +23,7 @@
            </p>
            {% endfor %}
 
+
 {#           {% if message %}#}
 {#           <h2>{{ message }}</h2>#}
 {#           {% endif %}#}
@@ -36,6 +37,9 @@
                     {{ pins[pin].name }}
                     {% endif %}
                     {% endfor %}
+
+                    {% if len(pins) == 0 %}
+                    No devices currently in use.
                 </p>
 
                 <p> Used today:
