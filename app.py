@@ -1,9 +1,14 @@
 from flask import Flask, render_template
 import RPi.GPIO as GPIO
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////energyUsage'
+db = SQLAlchemy(app)
+db.create_all()
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
+
 
 # Create dictionary to store pin info
 pins = {
