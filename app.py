@@ -7,7 +7,7 @@ GPIO.setmode(GPIO.BCM)
 
 # Create a dictionary called pins to store the pin number, name, and pin state:
 pins = {
-    25: {'name': 'Light', 'state': 'GPIO.LOW'}
+    25: {'name': 'Light', 'state': GPIO.LOW}
 }
 #
 # Set each pin as an output and make it low:
@@ -20,7 +20,7 @@ for pin in pins:
 def main():
     # For each pin, read the pin state and store it in the pins dictionary:
     for pin in pins:
-        pins[pin]['state'] = 'GPIO.input(pin)'
+        pins[pin]['state'] = GPIO.input(pin)
     # Put the pin dictionary into the template data dictionary:
     template_data = {
         'pins': pins
