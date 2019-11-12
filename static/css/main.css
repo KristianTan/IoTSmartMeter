@@ -22,11 +22,12 @@ body{
     border-color: black;
     border-width: 1px;
     margin-left: 5%;
+    text-align: center;
 }
 
 .device_list_title{
     text-decoration: underline;
-    text-align: center;
+    text-align: left;
 }
 
 .smart_meter{
