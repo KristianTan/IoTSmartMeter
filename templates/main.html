@@ -32,7 +32,6 @@
         <div class="smart_meter">
             <div class="smart_meter_info">
                 <p> Devices currently in use:
-                    {% msg = "" %}
                     {% for pin in pins %}
                     {% if pins[pin].state == true %}
                     {{% msg = pins[pin].name %}}
