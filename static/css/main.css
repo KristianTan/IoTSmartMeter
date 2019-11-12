@@ -5,7 +5,7 @@ body{
 .heading {
     text-decoration: underline;
     text-align: center;
-    background-color: aqua;
+    /*background-color: aqua;*/
 }
 
 .container{
@@ -20,6 +20,7 @@ body{
     /*background-color: red;*/
     border-style: solid;
     border-color: black;
+    border-width: 1px;
 }
 
 .smart_meter{
