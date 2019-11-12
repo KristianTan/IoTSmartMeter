@@ -20,11 +20,17 @@ body{
 }
 
 .spacer{
-    width: 10%;
+    width: 5%;
     background-color: green;
 }
 
 .smart_meter{
-    width: 65%;
+    width: 70%;
     background-color: coral;
+}
+
+.display {
+    width: 80%;
+    height: 80%;
+    padding: 5%;
 }
