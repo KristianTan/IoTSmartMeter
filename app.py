@@ -32,7 +32,7 @@ def main():
 # The function below is executed when someone requests a URL with the pin number and action in it:
 @app.route("/<change_pin>/<action>")
 def action(change_pin, action):
-    print("Input value before change: " + GPIO.input(change_pin))
+    print("Input value before change: " + str(GPIO.input(change_pin)))
     change_pin = int(change_pin)
     device_name = pins[change_pin]['name']
 
@@ -48,7 +48,7 @@ def action(change_pin, action):
 
     for pin in pins:
         pins[pin]['state'] = GPIO.input(pin)
-    print("Input value after change: " + GPIO.input(change_pin))
+    print("Input value after change: " + str(GPIO.input(change_pin)))
 
     template_data = {
         'message': message,
