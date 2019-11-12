@@ -35,7 +35,6 @@ def action(change_pin):
     change_pin = int(change_pin)
     device_name = pins[change_pin]['name']
     print("Input value before change: " + str(GPIO.input(change_pin)))
-    print("CHANGE PIN: " + change_pin)
 
     # if action == "on":
     #     GPIO.output(change_pin, GPIO.HIGH)
