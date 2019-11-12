@@ -21,6 +21,12 @@ body{
     border-right-style: solid;
     border-color: black;
     border-width: 1px;
+    margin-left: 5%;
+}
+
+.device_list_title{
+    text-decoration: underline;
+    text-align: center;
 }
 
 .smart_meter{
