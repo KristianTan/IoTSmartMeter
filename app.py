@@ -3,6 +3,7 @@ import RPi.GPIO as GPIO
 
 app = Flask(__name__)
 GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
 
 # Create dictionary to store pin info
 pins = {
