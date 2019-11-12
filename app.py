@@ -3,7 +3,8 @@ import RPi.GPIO as GPIO
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 import os
-from daily_usage import DailyUsage
+# from daily_usage import
+from . import DailyUsage
 
 app = Flask(__name__)
 os.environ['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///energyUsage'
