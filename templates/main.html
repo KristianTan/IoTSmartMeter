@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <head>
-   <title>Lighting control & Smart meter</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='/main.css') }}">
+   <title>Current Status</title>
 </head>
 
 <body>
-   <h1>Attached devices</h1>
+   <h1>Device Listing and Status</h1>
 
    {% for pin in pins %}
    <p>The {{ pins[pin].name }}
