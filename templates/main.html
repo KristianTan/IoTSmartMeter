@@ -14,11 +14,11 @@
            <h3 class="device_list_title">Device Listing and Status</h3>
 
            {% for pin in pins %}
-           <p>The {{ pins[pin].name }}
+           <p>{{ pins[pin].name }} :
            {% if pins[pin].state == true %}
-              is currently on (<a href="/{{pin}}">turn off</a>)
+              (<a href="/{{pin}}">turn off</a>)
            {% else %}
-              is currently off (<a href="/{{pin}}">turn on</a>)
+              (<a href="/{{pin}}">turn on</a>)
            {% endif %}
            </p>
            {% endfor %}
@@ -30,12 +30,16 @@
 
         <div class="smart_meter">
             <div class="smart_meter_info">
-                <p>Devices currently in use:
+                <p> Devices currently in use:
                     {% for pin in pins %}
                     {% if pins[pin].state == true %}
                     {{ pins[pin].name }}
                     {% endif %}
                     {% endfor %}
+                </p>
+
+                <p> Used today:
+
                 </p>
             </div>
         </div>
