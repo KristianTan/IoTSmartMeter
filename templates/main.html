@@ -9,9 +9,9 @@
    {% for pin in pins %}
    <p>The {{ pins[pin].name }}
    {% if pins[pin].state == true %}
-      is currently on (<a href="/{{pin}}/off">turn off</a>)
+      is currently on (<a href="/{{pin}}">turn off</a>)
    {% else %}
-      is currently off (<a href="/{{pin}}/on">turn on</a>)
+      is currently off (<a href="/{{pin}}">turn on</a>)
    {% endif %}
    </p>
    {% endfor %}
