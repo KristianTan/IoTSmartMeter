@@ -5,6 +5,7 @@ body {
 .heading {
     text-decoration: underline;
     text-align: center;
+    margin-bottom: 10%;
     /*background-color: aqua;*/
 }
 
@@ -18,9 +19,6 @@ body {
 .device_list {
     width: 25%;
     /*background-color: red;*/
-    border-right-style: solid;
-    border-color: black;
-    border-width: 1px;
     margin-left: 5%;
     text-align: left;
 }
