@@ -45,6 +45,9 @@ def action(change_pin, action):
         GPIO.output(change_pin, not GPIO.input(change_pin))
         message = "Toggled " + device_name + "."
 
+    for pin in pins:
+        pins[pin]['state'] = GPIO.input(pin)
+
     template_data = {
         'message': message,
         'pins': pins
