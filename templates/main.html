@@ -9,21 +9,31 @@
 </div>
 
 <body>
-   <h1>Device Listing and Status</h1>
+    <div class="container">
+        <div class="device_list">
+           <h3>Device Listing and Status</h3>
 
-   {% for pin in pins %}
-   <p>The {{ pins[pin].name }}
-   {% if pins[pin].state == true %}
-      is currently on (<a href="/{{pin}}">turn off</a>)
-   {% else %}
-      is currently off (<a href="/{{pin}}">turn on</a>)
-   {% endif %}
-   </p>
-   {% endfor %}
+           {% for pin in pins %}
+           <p>The {{ pins[pin].name }}
+           {% if pins[pin].state == true %}
+              is currently on (<a href="/{{pin}}">turn off</a>)
+           {% else %}
+              is currently off (<a href="/{{pin}}">turn on</a>)
+           {% endif %}
+           </p>
+           {% endfor %}
 
-   {% if message %}
-   <h2>{{ message }}</h2>
-   {% endif %}
+           {% if message %}
+           <h2>{{ message }}</h2>
+           {% endif %}
+        </div>
 
+        <div class="spacer"></div>
+
+        <div class="smart_meter"></div>
+    </div>
 </body>
+
+
+
 </html>

@@ -7,3 +7,24 @@ body{
     text-align: center;
     background-color: aqua;
 }
+
+.container{
+    display: flex;
+    flex-direction: row;
+    background-color: red;
+}
+
+.device_list{
+    width: 25%;
+    background-color: red;
+}
+
+.spacer{
+    width: 10%;
+    background-color: green;
+}
+
+.smart_meter{
+    width: 65%;
+    background-color: coral;
+}
