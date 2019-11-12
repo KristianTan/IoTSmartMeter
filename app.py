@@ -6,15 +6,18 @@ import os
 import daily_usage
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///energyUsage'
-db = SQLAlchemy(app)
-db.create_all()
+os.environ['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///energyUsage'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
+db = SQLAlchemy(app)
+db.create_all()
+
 engine = create_engine(os.environ['SQLALCHEMY_DATABASE_URI'])
 
-daily_usage.DailyUsage.metadata.createall()
+daily_usage.DailyUsage.metadata.createall(engine)
 
 test = daily_usage.DailyUsage("12/11/2019", 5)
 db.session.add(test)
