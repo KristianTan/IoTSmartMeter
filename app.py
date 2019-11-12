@@ -1,6 +1,8 @@
 from flask import Flask, render_template
 import RPi.GPIO as GPIO
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import create_engine
+import os
 import daily_usage
 
 app = Flask(__name__)
@@ -9,6 +11,10 @@ db = SQLAlchemy(app)
 db.create_all()
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
+
+engine = create_engine(os.environ['SQLALCHEMY_DATABASE_URI'])
+
+daily_usage.DailyUsage.metadata.createall()
 
 test = daily_usage.DailyUsage("12/11/2019", 5)
 db.session.add(test)
