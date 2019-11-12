@@ -3,7 +3,7 @@ import RPi.GPIO as GPIO
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////energyUsage'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///energyUsage'
 db = SQLAlchemy(app)
 db.create_all()
 GPIO.setmode(GPIO.BCM)
