@@ -39,7 +39,7 @@
                     {% endfor %}
 
                     {% if pins|length == 0 %}
-                        {{% msg = No devices currently in use. %}}
+                        {% msg = "No devices currently in use." %}
                     {% endif %}
                     {{ msg }}
                 </p>
