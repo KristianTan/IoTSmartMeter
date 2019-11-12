@@ -1,7 +1,9 @@
-body {
-    background-color: aqua;
+body{
+    font-family: "Roboto Thin";
 }
 
 .heading {
     text-decoration: underline;
+    text-align: center;
+    background-color: aqua;
 }
