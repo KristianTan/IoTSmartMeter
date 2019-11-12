@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 import RPi.GPIO as GPIO
 from flask_sqlalchemy import SQLAlchemy
-from .daily_usage import DailyUsage
+from daily_usage import DailyUsage
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///energyUsage'

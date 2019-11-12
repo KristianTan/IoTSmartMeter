@@ -1,5 +1,4 @@
-from .app import db
-
+from app import db
 
 class DailyUsage(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
