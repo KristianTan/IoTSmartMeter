@@ -12,6 +12,7 @@ body{
     display: flex;
     flex-direction: row;
     background-color: red;
+    height: 100%;
 }
 
 .device_list{
