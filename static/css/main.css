@@ -11,24 +11,26 @@ body{
 .container{
     display: flex;
     flex-direction: row;
-    background-color: darkkhaki;
+    /*background-color: darkkhaki;*/
     height: 100%;
 }
 
-/*.device_list{*/
-/*    width: 25%;*/
-/*    background-color: red;*/
-/*}*/
+.device_list{
+    width: 25%;
+    /*background-color: red;*/
+}
 
-/*.spacer{*/
-/*    width: 5%;*/
-/*    background-color: green;*/
-/*}*/
+.spacer{
+    width: 5%;
+    /*background-color: green;*/
+}
 
-/*.smart_meter{*/
-/*    width: 70%;*/
-/*    background-color: coral;*/
-/*}*/
+.smart_meter{
+    width: 70%;
+    /*background-color: coral;*/
+    border-style: solid;
+    border-color: black;
+}
 
 .display {
     width: 80%;
