@@ -29,7 +29,13 @@
         </div>
 
         <div class="smart_meter">
-
+            <div class="smart_meter_info">
+                <p>Devices currently in use:
+                    {% for pin in pins %}
+                    {% if pins[pin].state == true %}
+                    {{ pins[pin].name }}
+                </p>
+            </div>
         </div>
     </div>
 </body>

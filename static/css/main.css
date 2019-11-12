@@ -1,4 +1,4 @@
-body{
+body {
     font-family: "Roboto Thin";
 }
 
@@ -8,29 +8,27 @@ body{
     /*background-color: aqua;*/
 }
 
-.container{
+.container {
     display: flex;
     flex-direction: row;
     /*background-color: darkkhaki;*/
     height: 100%;
 }
 
-.device_list{
+.device_list {
     width: 25%;
     /*background-color: red;*/
     border-right-style: solid;
     border-color: black;
     border-width: 1px;
     margin-left: 5%;
-    text-align: center;
 }
 
-.device_list_title{
+.device_list_title {
     text-decoration: underline;
-    text-align: left;
 }
 
-.smart_meter{
+.smart_meter {
     width: 65%;
     margin-right: 5%;
     margin-left: 5%;
@@ -38,4 +36,8 @@ body{
     border-style: solid;
     border-color: black;
     border-width: 1px;
+}
+
+.smart_meter_info {
+
 }
