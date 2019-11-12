@@ -6,7 +6,6 @@ import daily_usage
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///energyUsage'
 db = SQLAlchemy(app)
-SQLAlchemy.create_all()
 db.create_all()
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
