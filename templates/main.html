@@ -34,14 +34,9 @@
                 <p> Devices currently in use:
                     {% for pin in pins %}
                     {% if pins[pin].state == true %}
-                    {% msg = pins[pin].name %}
+                    {{ pins[pin].name }}
                     {% endif %}
                     {% endfor %}
-
-                    {% if pins|length == 0 %}
-                        {% msg = "No devices currently in use." %}
-                    {% endif %}
-                    {{ msg }}
                 </p>
 
                 <p> Used today:
