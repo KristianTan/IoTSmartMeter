@@ -43,6 +43,8 @@ if latest_entry:
     if latest_entry_date == datetime.today().date():
         daily_total = format(latest_entry.kwhUsed, '.7f')
 
+todays_cost = format(float(daily_total) * 0.1622, '0.5f')
+
 # Create dictionary to store pin info
 pins = {
     25: {'name': 'Light', 'state': GPIO.LOW, 'on_time': None, 'on_date': None, 'Wattage': 15}
@@ -63,7 +65,8 @@ def main():
     # Set the template data for the HTML template
     template_data = {
         'pins': pins,
-        'daily_total': daily_total
+        'daily_total': daily_total,
+        'todays_cost': todays_cost
     }
 
     return render_template('main.html', **template_data)
@@ -95,10 +98,7 @@ def toggle_pin(change_pin):
     else:
         daily_total = 0
 
-    todays_cost = float(daily_total) * 0.1622
-    print(todays_cost)
-    todays_cost = format(todays_cost, '.5f')
-    print(todays_cost)
+    todays_cost = format(float(daily_total) * 0.1622, '0.5f')
 
     template_data = {
         'pins': pins,
