@@ -91,9 +91,8 @@ def toggle_pin(change_pin):
                 print(latest_entry.on_time_seconds)
             else:
                 print("NEW ENTRY")
-                print("SECS")
-                print(elapsed)
                 entry = DailyUsage(date=start_date, on_time_seconds=elapsed)
+                print(entry.on_time_seconds)
                 db.session.add(entry)
 
             db.session.commit()
