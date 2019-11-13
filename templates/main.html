@@ -50,8 +50,8 @@
     <div class="inputs">
         {% if display_change_kWh == True %}
             <form action="{{ url_for('handle_change_kWh') }}" method="post">
-                Change cost per kWh: <input type="text" name="kWhprice">
-                <input type="submit" required>
+                Change cost per kWh: <input type="text" name="kWhprice" required>
+                <input type="submit">
             </form>
         {% endif %}
 
