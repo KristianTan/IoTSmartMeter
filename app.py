@@ -81,6 +81,8 @@ def toggle_pin(change_pin):
         message += " off."
         if pins[change_pin]['on_time'] is not None:
             latest_entry = db.session.query(DailyUsage).order_by(DailyUsage.id.desc()).first()
+            latest_entry_date = date(latest_entry.date.year, latest_entry.date.month, latest_entry.date.day)
+            print(latest_entry)
             start_time = pins[change_pin]['on_time']
             # Get the elapsed time and strip away milliseconds
             elapsed = int((datetime.now() - start_time).total_seconds())
@@ -90,11 +92,11 @@ def toggle_pin(change_pin):
             # if latest_entry:
                 # print(latest_entry.date)
                 # print(start_date)
-            if latest_entry and latest_entry.date == start_date:
+            if latest_entry and latest_entry_date == start_date:
                 latest_entry.on_time_seconds += elapsed
             else:
                 # If no entry for today, make one
-                print(start_date)
+                # print(start_date)
                 entry = DailyUsage(date=start_date, on_time_seconds=elapsed)
                 db.session.add(entry)
             db.session.commit()
