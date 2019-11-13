@@ -1,4 +1,4 @@
-from .app import db
+from app import db
 
 
 class DailyUsage(db.Model):
@@ -7,4 +7,4 @@ class DailyUsage(db.Model):
     hours = db.Column(db.Integer(120), unique=False)
 
     def __repr__(self):
-        return '<User %r>' % self.username
+        return '<DailyUsage %r>' % self.id
