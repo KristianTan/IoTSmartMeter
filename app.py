@@ -38,7 +38,8 @@ db.create_all()
 # TODO: be able to query db by date
 daily_total = 0
 latest_entry = db.session.query(DailyUsage).order_by(DailyUsage.id.desc()).first()
-if latest_entry and latest_entry.date == datetime.today().date():
+latest_entry_date = date(latest_entry.date.year, latest_entry.date.month, latest_entry.date.day)
+if latest_entry and latest_entry_date == datetime.today().date():
     daily_total += latest_entry.on_time_seconds
 
 
@@ -90,13 +91,10 @@ def toggle_pin(change_pin):
 
             # If there is already an entry for today, update on time
             # if latest_entry:
-                # print(latest_entry.date)
-                # print(start_date)
             if latest_entry and latest_entry_date == start_date:
                 latest_entry.on_time_seconds += elapsed
             else:
                 # If no entry for today, make one
-                # print(start_date)
                 entry = DailyUsage(date=start_date, on_time_seconds=elapsed)
                 db.session.add(entry)
             db.session.commit()
@@ -113,7 +111,7 @@ def toggle_pin(change_pin):
     latest_entry = db.session.query(DailyUsage).order_by(DailyUsage.id.desc()).first()
     if latest_entry and latest_entry.date == datetime.today().date():
         daily_total = latest_entry.on_time_seconds
-    else :
+    else:
         daily_total = 0
 
     template_data = {
