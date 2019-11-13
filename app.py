@@ -33,6 +33,7 @@ class DailyUsage(db.Model):
 
 
 db.create_all()
+DailyUsage.query().delete()
 
 # Create dictionary to store pin info
 pins = {
@@ -61,7 +62,7 @@ def main():
 
 @app.route("/<change_pin>")
 def toggle_pin(change_pin):
-    # TODO: change_pin is somethimes favicon.co for some reason? Fix
+    # TODO: change_pin is sometimes favicon.co for some reason? Fix
     if change_pin == 'favicon.ico':
         pass
 
@@ -76,16 +77,19 @@ def toggle_pin(change_pin):
         message += " off."
         if pins[change_pin]['on_time'] is not None:
             uptime = str(datetime.now() - pins[change_pin]['on_time'])
-            print("===========")
-            print("UPTIME STRING: " + uptime)
-            print("===========")
             d = DailyUsage(date=pins[change_pin]['on_time'], hours=uptime)
+
+            print("===========")
+            print("DAILYUSAGE: " + d)
+            print("===========")
+
             db.session.add(d)
             db.session.commit()
             pins[change_pin]['on_time'] = None
+
             print("==========")
-            d = DailyUsage.query.filter_by(id=1)
-            print(d)
+            e = DailyUsage.query.filter_by(id=1)
+            print("DB ENTRY: " + e)
             print("==========")
     else:
         message += " on."
