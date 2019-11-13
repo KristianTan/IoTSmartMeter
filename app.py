@@ -80,8 +80,9 @@ todays_cost = get_todays_cost()
 # Create dictionary to store pin info
 pins = {
     25: {'name': 'Light', 'state': GPIO.LOW, 'on_time': None, 'on_date': None, 'Wattage': 15},
-    28: {'name': None, 'state': GPIO.LOW, 'on_time': None, 'on_date': None, 'Wattage': 0},
-    27: {'name': None, 'state': GPIO.LOW, 'on_time': None, 'on_date': None, 'Wattage': 0}
+    8: {'name': None, 'state': GPIO.LOW, 'on_time': None, 'on_date': None, 'Wattage': 0},
+    7: {'name': None, 'state': GPIO.LOW, 'on_time': None, 'on_date': None, 'Wattage': 0},
+    12: {'name': None, 'state': GPIO.LOW, 'on_time': None, 'on_date': None, 'Wattage': 0}
 }
 
 
