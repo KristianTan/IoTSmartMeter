@@ -7,4 +7,4 @@ class DailyUsage(db.Model):
     hours = db.Column(db.Integer(120), unique=False)
 
     def __repr__(self):
-        return '<User %r>' % self.id
+        return '<DailyUsage %r>' % self.id
