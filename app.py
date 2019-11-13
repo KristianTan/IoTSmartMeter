@@ -2,7 +2,7 @@ from flask import Flask, render_template
 import RPi.GPIO as GPIO
 from flask_sqlalchemy import SQLAlchemy
 import os
-import datetime
+from datetime import datetime
 # from daily_usage import DailyUsage
 
 app = Flask(__name__)
@@ -74,13 +74,17 @@ def toggle_pin(change_pin):
     message = "Turned " + device_name
     if GPIO.input(change_pin) == 0:
         message += " off."
+        uptime = datetime.now() - pins[change_pin]['on_time']
+        d = DailyUsage(date=pins[change_pin]['on_time'], hours=uptime)
+        db.session.add(d)
+        db.session.commit()
+        pins[change_pin]['on_time'] = None
+        print("==========")
+        print(DailyUsage.query.all())
+        print("==========")
     else:
         message += " on."
-        pins[change_pin]['on_time'] = datetime.datetime.now()
-        print("==================")
-        print("HERE IS THE PIN DATA: ")
-        print(pins[change_pin])
-        print("==================")
+        pins[change_pin]['on_time'] = datetime.now()
 
     for pin in pins:
         pins[pin]['state'] = GPIO.input(pin)
