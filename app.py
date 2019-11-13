@@ -95,8 +95,7 @@ def toggle_pin(change_pin):
     else:
         daily_total = 0
 
-    print(type(daily_total))
-    # todays_cost = 0.1622 * daily_total
+    todays_cost = 0.1622 * float(daily_total)
 
     template_data = {
         'pins': pins,
