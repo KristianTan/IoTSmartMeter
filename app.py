@@ -60,7 +60,7 @@ def main():
     return render_template('main.html', **template_data)
 
 
-@app.route("/<change_pin>")
+@app.route("/toggle/<change_pin>")
 def toggle_pin(change_pin):
     # TODO: change_pin is sometimes favicon.co for some reason? Fix
     print("========")
