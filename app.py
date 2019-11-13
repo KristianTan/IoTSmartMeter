@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import RPi.GPIO as GPIO
 from flask_sqlalchemy import SQLAlchemy
 
@@ -134,6 +134,17 @@ def create_entry(change_pin):
     db.session.commit()
     pins[change_pin]['on_time'] = None
     pins[change_pin]['on_date'] = None
+
+@app.route('/handle_data', methods=['POST'])
+def handle_data():
+    projectpath = request.form['kWhprice']
+    print(projectpath)
+    template_data = {
+        'pins': pins,
+        'daily_total': daily_total,
+        'todays_cost': todays_cost
+    }
+    return render_template('main.html', **template_data)
 
 
 if __name__ == '__main__':
