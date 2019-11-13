@@ -73,15 +73,14 @@ def toggle_pin(change_pin):
         message += " off."
         if pins[change_pin]['on_time'] is not None:
             start_time = pins[change_pin]['on_time']
-            elapsed = datetime.now() - start_time
-            elapsed_formatted = datetime.strftime(elapsed, '%H-%M-%S')
+            elapsed = str(datetime.now() - start_time)
 
             # Format the time
             start_date_string = datetime.strftime(start_time, '%Y-%m-%d')
             # Create datetime object from formatted time
             start_date = datetime.strptime(start_date_string, '%Y-%m-%d')
 
-            entry = DailyUsage(date=start_date, on_time=elapsed_formatted)
+            entry = DailyUsage(date=start_date, on_time=elapsed)
             db.session.add(entry)
             db.session.commit()
 
