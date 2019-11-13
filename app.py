@@ -20,21 +20,20 @@ db = SQLAlchemy(app)
 # TODO: Move this into daily_usage class file
 class DailyUsage(db.Model):
     __tablename__ = 'daily_usage'
+
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     date = db.Column(db.DateTime, unique=True, nullable=False)
-    hours = db.Column(db.String, unique=False)
+    on_time = db.Column(db.String, unique=False)
 
-    def __init__(self, id, date, hours):
-        self.id = id
+    def __init__(self, date, on_time):
         self.date = date
-        self.hours = hours
+        self.on_time = on_time
 
     def __repr__(self):
         return '<DailyUsage %r>' % self.date
 
 
 db.create_all()
-print(DailyUsage.query.all())
 
 # Create dictionary to store pin info
 pins = {
@@ -72,7 +71,19 @@ def toggle_pin(change_pin):
     message = "Turned " + device_name
     if GPIO.input(change_pin) == 0:
         message += " off."
-        pins[change_pin]['on_time'] = None
+        if pins[change_pin]['on_time'] is not None:
+            start_time = pins[change_pin]['on_time']
+            elapsed = str(datetime.now() - start_time)
+            date = start_time.date()
+            entry = DailyUsage(date=date, on_time=elapsed)
+            db.session.add(entry)
+            db.session.commit()
+
+            print("=========")
+            DailyUsage.query.all()
+            print("=========")
+
+            pins[change_pin]['on_time'] = None
     else:
         message += " on."
         pins[change_pin]['on_time'] = datetime.now()
