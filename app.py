@@ -147,9 +147,11 @@ def handle_data():
     }
     return render_template('main.html', **template_data)
 
+
 @app.route("/devices/add_device")
 def add_new_device():
     pass
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8090)
