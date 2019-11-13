@@ -93,7 +93,7 @@
      // get bar chart canvas
      var mychart = document.getElementById("chart").getContext("2d");
        steps = 10
-       max = 17000
+       max = {{ max }}
      // draw bar chart
      new Chart(mychart).Bar(barData, {
        scaleOverride: true,
