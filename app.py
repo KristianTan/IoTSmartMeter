@@ -61,6 +61,7 @@ def main():
     # Set the template data for the HTML template
     template_data = {
         'pins': pins
+        'daily_total': daily_total
     }
 
     return render_template('main.html', **template_data)
@@ -108,7 +109,8 @@ def toggle_pin(change_pin):
 
     template_data = {
         'message': message,
-        'pins': pins
+        'pins': pins,
+        'daily_total': daily_total
     }
 
     return render_template('main.html', **template_data)
