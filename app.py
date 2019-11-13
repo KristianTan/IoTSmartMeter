@@ -38,7 +38,6 @@ db.create_all()
 # TODO: be able to query db by date
 daily_total = 0
 latest_entry = db.session.query(DailyUsage).order_by(DailyUsage.id.desc()).first()
-print(latest_entry.date)
 if latest_entry and latest_entry.date == datetime.today():
     daily_total = latest_entry.on_time_seconds
 
