@@ -73,11 +73,12 @@ def create_entry(change_pin):
     pins[change_pin]['on_time'] = None
     pins[change_pin]['on_date'] = None
 
-max = 0
-labels = []
-values = []
 
 def generate_graph_data():
+    labels = []
+    values = []
+    max = 0
+
     # Create data for chart
     count = 0
     records = DailyUsage.query.order_by(asc(DailyUsage.date)).all()
@@ -89,6 +90,7 @@ def generate_graph_data():
         count += 1
         if count >= 7:
             break
+    return labels, values, max
 
 db.create_all()
 
@@ -110,7 +112,7 @@ for pin in pins:
     GPIO.output(pin, GPIO.LOW)
 
 
-generate_graph_data()
+labels, values, max = generate_graph_data()
 
 # Create data for chart
 # count = 0
