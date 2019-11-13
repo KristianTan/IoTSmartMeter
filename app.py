@@ -189,6 +189,7 @@ def delete_pin(delete_pin):
     for key in pins:
         if key == delete_pin:
             pins.pop(delete_pin)
+            break
 
     template_data = {
         'pins': pins,
