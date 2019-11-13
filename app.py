@@ -79,8 +79,7 @@ def toggle_pin(change_pin):
             print("===========")
             print("UPTIME STRING: " + uptime)
             print("===========")
-            date = datetime.strptime(pins[change_pin]['on_time'], '%b %d %Y %I:%M%p')
-            d = DailyUsage(date=date, hours=uptime)
+            d = DailyUsage(date=pins[change_pin]['on_time'], hours=uptime)
             db.session.add(d)
             db.session.commit()
             pins[change_pin]['on_time'] = None
