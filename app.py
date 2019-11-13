@@ -101,7 +101,7 @@ def toggle_pin(change_pin):
     template_data = {
         'pins': pins,
         'daily_total': daily_total,
-        'todays_cost': todays_cost
+        # 'todays_cost': todays_cost
     }
 
     return render_template('main.html', **template_data)
