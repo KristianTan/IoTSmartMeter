@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 import RPi.GPIO as GPIO
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import asc
+from sqlalchemy import asc, desc
 import os
 from datetime import datetime, date, timedelta
 # from daily_usage import DailyUsage
@@ -37,7 +37,7 @@ class DailyUsage(db.Model):
 
 def get_todays_usage():
     records = DailyUsage.query.order_by(asc(DailyUsage.date)).all()
-    latest_entry = DailyUsage.query.order_by(asc(DailyUsage.date)).last()
+    latest_entry = DailyUsage.query.order_by(desc(DailyUsage.date)).first()
     print(latest_entry)
     # latest_entry = db.session.query(DailyUsage).order_by(DailyUsage.date.asc()).first()
     if latest_entry:
