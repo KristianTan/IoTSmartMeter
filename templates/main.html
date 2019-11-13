@@ -2,6 +2,7 @@
 <head>
    <title>Current Status</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
 </head>
 
 <div class="heading">
@@ -45,6 +46,49 @@
                     {% endif %}
                     {% endfor %}
                 </ul>
+
+{#            <div class="chart">#}
+                <h3 class="chart_title">Last weeks usage</h3>
+                <canvas id="chart" class="chart" ></canvas>
+                <script>
+                  // bar chart data
+                  var barData = {
+                    labels : [
+                      {% for item in labels %}
+                       "{{ item }}",
+                      {% endfor %}
+                ],
+                    datasets : [{
+                      fillColor: "rgba(151,187,205,0.2)",
+                      strokeColor: "rgba(151,187,205,1)",
+                      pointColor: "rgba(151,187,205,1)",
+                      data : [
+                        {% for item in values %}
+                           "{{ item }}",
+                          {% endfor %}
+                    ]
+                      }
+                    ]
+                  }
+                 // get bar chart canvas
+                 var mychart = document.getElementById("chart").getContext("2d");
+                   steps = 1
+                   max = {{ max }}
+                 // draw bar chart
+                 new Chart(mychart).Bar(barData, {
+                   scaleOverride: true,
+                   scaleSteps: steps,
+                   scaleStepWidth: Math.ceil(max / steps),
+                   scaleStartValue: 0,
+                   scaleShowVerticalLines: true,
+                   scaleShowGridLines : true,
+                   barShowStroke : true,
+                   scaleShowLabels: true
+                   }
+                 );
+                </script>
+
+{#            </div>#}
             </div>
         </div>
     </div>
@@ -67,49 +111,5 @@
         {% endif %}
 
     </div>
-
-<canvas id="chart" width="600" height="400"></canvas>
-    <script>
-      // bar chart data
-      var barData = {
-        labels : [
-          {% for item in labels %}
-           "{{ item }}",
-          {% endfor %}
-	],
-        datasets : [{
-          fillColor: "rgba(151,187,205,0.2)",
-          strokeColor: "rgba(151,187,205,1)",
-          pointColor: "rgba(151,187,205,1)",
-          data : [
-            {% for item in values %}
-               "{{ item }}",
-              {% endfor %}
-	    ]
-          }
-        ]
-      }
-     // get bar chart canvas
-     var mychart = document.getElementById("chart").getContext("2d");
-       steps = 10
-       max = 17000
-     // draw bar chart
-     new Chart(mychart).Bar(barData, {
-       scaleOverride: true,
-       scaleSteps: steps,
-       scaleStepWidth: Math.ceil(max / steps),
-       scaleStartValue: 0,
-       scaleShowVerticalLines: true,
-       scaleShowGridLines : true,
-       barShowStroke : true,
-       scaleShowLabels: true
-       }
-     );
-    </script>
-
-
 </body>
-
-
-
 </html>

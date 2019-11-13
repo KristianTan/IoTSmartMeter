@@ -53,4 +53,16 @@ body {
 
 .smart_meter_info {
     margin-left: 5%;
+    margin-bottom: 5%;
+}
+
+.chart {
+    width: 70%;
+    height: 50%;
+    margin-left: 25%;
+}
+
+.chart_title {
+    text-decoration: underline;
+    text-align: center;
 }

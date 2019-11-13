@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 import RPi.GPIO as GPIO
 from flask_sqlalchemy import SQLAlchemy
-
+from sqlalchemy import asc, desc
 import os
 from datetime import datetime, date, timedelta
 # from daily_usage import DailyUsage
@@ -36,7 +36,8 @@ class DailyUsage(db.Model):
 
 
 def get_todays_usage():
-    latest_entry = db.session.query(DailyUsage).order_by(DailyUsage.id.desc()).first()
+    latest_entry = DailyUsage.query.order_by(desc(DailyUsage.date)).first()
+    # latest_entry = db.session.query(DailyUsage).order_by(DailyUsage.date.asc()).first()
     if latest_entry:
         latest_entry_date = date(latest_entry.date.year, latest_entry.date.month, latest_entry.date.day)
         if latest_entry_date == datetime.today().date():
@@ -49,7 +50,7 @@ def get_todays_cost():
 
 
 def create_entry(change_pin):
-    latest_entry = db.session.query(DailyUsage).order_by(DailyUsage.id.desc()).first()
+    latest_entry = DailyUsage.query.order_by(desc(DailyUsage.date)).first()
     start_time = pins[change_pin]['on_time']
     # Get the elapsed time and strip away milliseconds
     elapsed = int((datetime.now() - start_time).total_seconds())
@@ -93,35 +94,41 @@ for pin in pins:
     GPIO.output(pin, GPIO.LOW)
 
 
+labels = []
+values = []
+max = 0
+
+# Create data for chart
+count = 0
+records = DailyUsage.query.order_by(asc(DailyUsage.date)).all()
+for record in records:
+    labels.append(date(record.date.year, record.date.month, record.date.day))
+    values.append(record.kwhUsed)
+    if record.kwhUsed > max:
+        max = record.kwhUsed
+    count += 1
+    if count >= 7:
+        break
+
 @app.route("/")
 def main():
     # For each pin, read the pin state and store it in the pins dictionary:
     for pin in pins:
         pins[pin]['state'] = GPIO.input(pin)
 
-    # Set the template data for the HTML template
     template_data = {
         'pins': pins,
         'daily_total': daily_total,
         'todays_cost': todays_cost,
         'cost_per_kWh': os.environ['cost_per_kWh'],
         'display_new_device_form': False,
-        'display_change_kWh': False
+        'display_change_kWh': False,
+        'labels': labels,
+        'values': values,
+        'max': max
     }
 
-    labels = [
-        'JAN', 'FEB', 'MAR', 'APR',
-        'MAY', 'JUN', 'JUL', 'AUG',
-        'SEP', 'OCT', 'NOV', 'DEC'
-    ]
-
-    values = [
-        967.67, 1190.89, 1079.75, 1349.19,
-        2328.91, 2504.28, 2873.83, 4764.87,
-        4349.29, 6458.30, 9907, 16297
-    ]
-
-    return render_template('main.html', **template_data, labels=labels, values=values)
+    return render_template('main.html', **template_data)
 
 
 @app.route("/toggle/<change_pin>")
@@ -146,7 +153,10 @@ def toggle_pin(change_pin):
         'pins': pins,
         'daily_total': get_todays_usage(),
         'todays_cost': get_todays_cost(),
-        'cost_per_kWh': os.environ['cost_per_kWh']
+        'cost_per_kWh': os.environ['cost_per_kWh'],
+        'labels': labels,
+        'values': values,
+        'max': max
     }
 
     return render_template('main.html', **template_data)
@@ -160,7 +170,10 @@ def handle_change_kWh():
         'pins': pins,
         'daily_total': daily_total,
         'todays_cost': todays_cost,
-        'cost_per_kWh': os.environ['cost_per_kWh']
+        'cost_per_kWh': os.environ['cost_per_kWh'],
+        'labels': labels,
+        'values': values,
+        'max': max
     }
     return render_template('main.html', **template_data)
 
@@ -172,7 +185,10 @@ def add_new_device():
         'daily_total': daily_total,
         'todays_cost': todays_cost,
         'cost_per_kWh': os.environ['cost_per_kWh'],
-        'display_new_device_form': True
+        'display_new_device_form': True,
+        'labels': labels,
+        'values': values,
+        'max': max
     }
     return render_template('main.html', **template_data)
 
@@ -192,6 +208,9 @@ def handle_new_device():
         'daily_total': daily_total,
         'todays_cost': todays_cost,
         'cost_per_kWh': os.environ['cost_per_kWh'],
+        'labels': labels,
+        'values': values,
+        'max': max
     }
     return render_template('main.html', **template_data)
 
@@ -210,6 +229,9 @@ def delete_pin(delete_pin):
         'daily_total': daily_total,
         'todays_cost': todays_cost,
         'cost_per_kWh': os.environ['cost_per_kWh'],
+        'labels': labels,
+        'values': values,
+        'max': max
     }
     return render_template('main.html', **template_data)
 
@@ -220,7 +242,10 @@ def change_kWh():
         'daily_total': daily_total,
         'todays_cost': todays_cost,
         'cost_per_kWh': os.environ['cost_per_kWh'],
-        'display_change_kWh': True
+        'display_change_kWh': True,
+        'labels': labels,
+        'values': values,
+        'max': max
     }
     return render_template('main.html', **template_data)
 
