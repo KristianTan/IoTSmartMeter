@@ -109,7 +109,7 @@ def main():
         values.append(record.kwhUsed)
         if record.kwhUsed > max:
             max = record.kwhUsed
-        print(record)
+        print(max)
 
     template_data = {
         'pins': pins,
