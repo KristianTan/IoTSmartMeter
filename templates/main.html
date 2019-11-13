@@ -9,29 +9,33 @@
 </div>
 
 <body>
-    <div class="container">
-        <form action="{{ url_for('handle_data') }}" method="post">
-            <input type="text" name="kWhprice">
-            <input type="submit">
-        </form>
+    <div class="containerRows">
         <div class="device_list">
            <h3 class="device_list_title">Device Listing and Status</h3>
 
-           {% for pin in pins %}
-           <p>{{ pins[pin].name }} :
-           {% if pins[pin].state == true %}
-              (<a href="/toggle/{{pin}}">turn off</a>)
-           {% else %}
-              (<a href="/toggle/{{pin}}">turn on</a>)
-           {% endif %}
-           </p>
-           {% endfor %}
-
+            {% for pin in pins %}
+                {% if pins[pin].name != None %}
+                    <p>
+                        {{ pins[pin].name }} :
+                    {% if pins[pin].state == true %}
+                        (<a href="/toggle/{{pin}}">turn off</a>)
+                    {% else %}
+                        (<a href="/toggle/{{pin}}">turn on</a>)
+                    </p>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            <p><a href="/devices/add_device">Add device</a></p>
 
         </div>
 
         <div class="smart_meter">
             <div class="smart_meter_info">
+{#            Implement some way to display "No devices" message if none are in use#}
+                <p> Cost per kWh: £{{ cost_per_kWh }} <a href="/update_info/kWh"> (Update)</a></p>
+                <p> Total energy used today: {{ daily_total }} kWh.</p>
+                <p> Total cost of today's energy usage: £{{ todays_cost }}</p>
+
                 <p> Devices currently in use: </p>
                 <ul>
                     {% for pin in pins %}
@@ -40,12 +44,27 @@
                     {% endif %}
                     {% endfor %}
                 </ul>
-{#            Implement some way to display "No devices" message if none are in use#}
-
-                <p> Total energy used today: {{ daily_total }} kWh.</p>
-                <p> Total cost of today's energy usage: £{{ todays_cost }}</p>
             </div>
         </div>
+    </div>
+    <div class="inputs">
+        {% if display_change_kWh == True %}
+            <form action="{{ url_for('handle_change_kWh') }}" method="post">
+                Change cost per kWh: <input type="text" name="kWhprice">
+                <input type="submit">
+            </form>
+        {% endif %}
+
+        {% if display_new_device_form == True %}
+            <div class=".add_new_device_form">
+                    <form action="{{ url_for('handle_new_device') }}" method="post">
+                        New device name: <input type="text" name="new_device_name"> <br>
+                        New device wattage: <input type="number" name="new_device_wattage"> <br>
+                        <input type="submit">
+                    </form>
+            </div>
+        {% endif %}
+
     </div>
 </body>
 
