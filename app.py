@@ -34,6 +34,7 @@ class DailyUsage(db.Model):
 
 
 db.create_all()
+print(DailyUsage.query.all())
 
 # Create dictionary to store pin info
 pins = {
@@ -62,14 +63,6 @@ def main():
 
 @app.route("/toggle/<change_pin>")
 def toggle_pin(change_pin):
-    # TODO: change_pin is sometimes favicon.co for some reason? Fix
-    print("========")
-    print(change_pin)
-    print("========")
-
-    if change_pin == 'favicon.ico':
-        pass
-
     change_pin = int(change_pin)
     device_name = pins[change_pin]['name']
 
