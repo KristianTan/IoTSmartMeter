@@ -86,6 +86,9 @@ def toggle_pin(change_pin):
             # Create datetime object from formatted time
             start_date = datetime.strptime(start_date_string, '%Y-%m-%d')
 
+            if latest_entry.date == start_date:
+                print("SUCCESS")
+
             entry = DailyUsage(date=start_date, on_time=elapsed)
             db.session.add(entry)
             db.session.commit()
