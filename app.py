@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 import RPi.GPIO as GPIO
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import desc
+from sqlalchemy import asc
 import os
 from datetime import datetime, date, timedelta
 # from daily_usage import DailyUsage
@@ -103,7 +103,7 @@ def main():
     values = []
     max = 0
 
-    records = DailyUsage.query.order_by(desc(DailyUsage.date)).all()
+    records = DailyUsage.query.order_by(asc(DailyUsage.date)).all()
     for record in records:
         labels.append(date(record.date.year, record.date.month, record.date.day))
         values.append(record.kwhUsed)
