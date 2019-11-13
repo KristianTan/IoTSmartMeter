@@ -25,14 +25,12 @@ class DailyUsage(db.Model):
     date = db.Column(db.String(80), unique=True, nullable=False)
     hours = db.Column(db.Integer, unique=False)
 
-    def __init__(self, date_, hours_):
-        self.date = date_
-        self.hours = hours_
+    def __init__(self, date, hours):
+        self.date = date
+        self.hours = hours
 
     def __repr__(self):
         return '<DailyUsage %r>' % self.id
-
-
 
 
 test = DailyUsage(date="12/11/2019", hours=5)
