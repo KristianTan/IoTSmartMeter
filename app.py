@@ -106,7 +106,7 @@ def main():
     records = DailyUsage.query.all()
     for record in records:
         labels.append(record.date)
-        values.append(record.kWhUsed)
+        values.append(record.kwhUsed)
         if record.kWhUsed > max:
             max = record.kWhUsed
         print(record)
