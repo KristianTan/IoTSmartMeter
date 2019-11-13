@@ -114,18 +114,6 @@ for pin in pins:
 
 labels, values, max = generate_graph_data()
 
-# Create data for chart
-# count = 0
-# records = DailyUsage.query.order_by(asc(DailyUsage.date)).all()
-# for record in records:
-#     labels.append(date(record.date.year, record.date.month, record.date.day))
-#     values.append(record.kwhUsed)
-#     if record.kwhUsed > max:
-#         max = record.kwhUsed
-#     count += 1
-#     if count >= 7:
-#         break
-
 @app.route("/")
 def main():
     # For each pin, read the pin state and store it in the pins dictionary:
@@ -158,6 +146,7 @@ def toggle_pin(change_pin):
     if GPIO.input(change_pin) == 0:
         if pins[change_pin]['on_time'] is not None:
             create_entry(change_pin)
+
     else:
         pins[change_pin]['on_time'] = datetime.now()
         pins[change_pin]['on_date'] = date.today()
@@ -165,6 +154,7 @@ def toggle_pin(change_pin):
     for pin in pins:
         pins[pin]['state'] = GPIO.input(pin)
 
+    labels, values, max = generate_graph_data()
     template_data = {
         'pins': pins,
         'daily_total': get_todays_usage(),
