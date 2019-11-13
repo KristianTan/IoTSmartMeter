@@ -74,6 +74,19 @@ def create_entry(change_pin):
     pins[change_pin]['on_date'] = None
 
 
+def generate_graph_data():
+    # Create data for chart
+    count = 0
+    records = DailyUsage.query.order_by(asc(DailyUsage.date)).all()
+    for record in records:
+        labels.append(date(record.date.year, record.date.month, record.date.day))
+        values.append(record.kwhUsed)
+        if record.kwhUsed > max:
+            max = record.kwhUsed
+        count += 1
+        if count >= 7:
+            break
+
 db.create_all()
 
 daily_total = get_todays_usage()
@@ -96,19 +109,20 @@ for pin in pins:
 
 labels = []
 values = []
+generate_graph_data()
 max = 0
 
 # Create data for chart
-count = 0
-records = DailyUsage.query.order_by(asc(DailyUsage.date)).all()
-for record in records:
-    labels.append(date(record.date.year, record.date.month, record.date.day))
-    values.append(record.kwhUsed)
-    if record.kwhUsed > max:
-        max = record.kwhUsed
-    count += 1
-    if count >= 7:
-        break
+# count = 0
+# records = DailyUsage.query.order_by(asc(DailyUsage.date)).all()
+# for record in records:
+#     labels.append(date(record.date.year, record.date.month, record.date.day))
+#     values.append(record.kwhUsed)
+#     if record.kwhUsed > max:
+#         max = record.kwhUsed
+#     count += 1
+#     if count >= 7:
+#         break
 
 @app.route("/")
 def main():
