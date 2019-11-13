@@ -38,7 +38,7 @@ db.create_all()
 # TODO: be able to query db by date
 daily_total = 0
 latest_entry = db.session.query(DailyUsage).order_by(DailyUsage.id.desc()).first()
-if latest_entry and latest_entry.date == datetime.today():
+if latest_entry and latest_entry.date == datetime.today().date():
     daily_total += latest_entry.on_time_seconds
 
 
@@ -87,6 +87,8 @@ def toggle_pin(change_pin):
             start_date = pins[change_pin]['on_date']
 
             # If there is already an entry for today, update on time
+            print(latest_entry.date)
+            print(start_date)
             if latest_entry and latest_entry.date == start_date:
                 latest_entry.on_time_seconds += elapsed
             else:
@@ -99,13 +101,13 @@ def toggle_pin(change_pin):
     else:
         message += " on."
         pins[change_pin]['on_time'] = datetime.now()
-        pins[change_pin]['on_date'] = datetime.today().date()
+        pins[change_pin]['on_date'] = datetime.now().date()
 
     for pin in pins:
         pins[pin]['state'] = GPIO.input(pin)
 
     latest_entry = db.session.query(DailyUsage).order_by(DailyUsage.id.desc()).first()
-    if latest_entry and latest_entry.date == datetime.today():
+    if latest_entry and latest_entry.date == datetime.today().date():
         daily_total = latest_entry.on_time_seconds
     else :
         daily_total = 0
