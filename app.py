@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 import os
 from datetime import datetime, date, timedelta
-# from daily_usage import DailyUsage
+from daily_usage import DailyUsage
 
 app = Flask(__name__)
 os.environ['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///energyUsage'
@@ -20,19 +20,19 @@ os.environ['cost_per_kWh'] = '0.1622'
 
 
 # TODO: Move this into daily_usage class file
-class DailyUsage(db.Model):
-    __tablename__ = 'daily_usage'
-
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    date = db.Column(db.DateTime, unique=True, nullable=False)
-    kwhUsed = db.Column(db.Float, unique=False)
-
-    def __init__(self, date, kwhUsed):
-        self.date = date
-        self.kwhUsed = kwhUsed
-
-    def __repr__(self):
-        return '<DailyUsage %r, %r, %r>' % (self.id, self.date, self.kwhUsed)
+# class DailyUsage(db.Model):
+#     __tablename__ = 'daily_usage'
+#
+#     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+#     date = db.Column(db.DateTime, unique=True, nullable=False)
+#     kwhUsed = db.Column(db.Float, unique=False)
+#
+#     def __init__(self, date, kwhUsed):
+#         self.date = date
+#         self.kwhUsed = kwhUsed
+#
+#     def __repr__(self):
+#         return '<DailyUsage %r, %r, %r>' % (self.id, self.date, self.kwhUsed)
 
 
 def get_todays_usage():
@@ -71,6 +71,7 @@ def create_entry(change_pin):
     db.session.commit()
     pins[change_pin]['on_time'] = None
     pins[change_pin]['on_date'] = None
+
 
 db.create_all()
 
