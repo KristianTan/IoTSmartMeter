@@ -2,7 +2,7 @@ from flask import Flask, render_template
 import RPi.GPIO as GPIO
 from flask_sqlalchemy import SQLAlchemy
 import os
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 # from daily_usage import DailyUsage
 
 app = Flask(__name__)
@@ -113,9 +113,10 @@ def toggle_pin(change_pin):
     if latest_entry:
         latest_entry_date = date(latest_entry.date.year, latest_entry.date.month, latest_entry.date.day)
         if latest_entry_date == datetime.today().date():
-            daily_total = latest_entry.on_time_seconds
+            daily_total = timedelta(seconds=latest_entry.on_time_seconds)
     else:
         daily_total = 0
+
 
     template_data = {
         'message': message,
