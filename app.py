@@ -82,7 +82,7 @@ def toggle_pin(change_pin):
         if pins[change_pin]['on_time'] is not None:
             latest_entry = db.session.query(DailyUsage).order_by(DailyUsage.id.desc()).first()
             latest_entry_date = date(latest_entry.date.year, latest_entry.date.month, latest_entry.date.day)
-            print(latest_entry)
+            print(latest_entry_date)
             start_time = pins[change_pin]['on_time']
             # Get the elapsed time and strip away milliseconds
             elapsed = int((datetime.now() - start_time).total_seconds())
