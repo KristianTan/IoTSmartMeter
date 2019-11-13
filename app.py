@@ -73,6 +73,9 @@ def create_entry(change_pin):
     pins[change_pin]['on_time'] = None
     pins[change_pin]['on_date'] = None
 
+max = 0
+labels = []
+values = []
 
 def generate_graph_data():
     # Create data for chart
@@ -107,10 +110,7 @@ for pin in pins:
     GPIO.output(pin, GPIO.LOW)
 
 
-labels = []
-values = []
 generate_graph_data()
-max = 0
 
 # Create data for chart
 # count = 0
