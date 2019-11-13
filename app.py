@@ -36,7 +36,6 @@ class DailyUsage(db.Model):
 
 
 def get_todays_usage():
-    records = DailyUsage.query.order_by(asc(DailyUsage.date)).all()
     latest_entry = DailyUsage.query.order_by(desc(DailyUsage.date)).first()
     print(latest_entry)
     # latest_entry = db.session.query(DailyUsage).order_by(DailyUsage.date.asc()).first()
@@ -52,7 +51,7 @@ def get_todays_cost():
 
 
 def create_entry(change_pin):
-    latest_entry = db.session.query(DailyUsage).order_by(DailyUsage.id.desc()).first()
+    latest_entry = DailyUsage.query.order_by(desc(DailyUsage.date)).first()
     start_time = pins[change_pin]['on_time']
     # Get the elapsed time and strip away milliseconds
     elapsed = int((datetime.now() - start_time).total_seconds())
