@@ -24,7 +24,8 @@ class DailyUsage(db.Model):
     date = db.Column(db.DateTime, unique=True, nullable=False)
     hours = db.Column(db.String, unique=False)
 
-    def __init__(self, date, hours):
+    def __init__(self, id, date, hours):
+        self.id = id
         self.date = date
         self.hours = hours
 
