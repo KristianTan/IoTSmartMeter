@@ -185,8 +185,9 @@ def handle_new_device():
 
 @app.route('/remove/<delete_pin>')
 def delete_pin(delete_pin):
+    delete_pin = int(delete_pin)
     for key in pins:
-        if key == int(delete_pin):
+        if key == delete_pin:
             pins.pop(delete_pin)
 
     template_data = {
