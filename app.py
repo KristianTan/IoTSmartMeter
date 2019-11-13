@@ -140,7 +140,7 @@ def toggle_pin(change_pin):
 
 
 @app.route('/handle_change_kWh', methods=['POST'])
-def handle_data():
+def handle_change_kWh():
     new_price = request.form['kWhprice']
     os.environ['cost_per_kWh'] = str(new_price)
     template_data = {
