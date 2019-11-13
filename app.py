@@ -170,7 +170,7 @@ def handle_new_device():
     for key in pins:
         if pins[key]['name'] is None:
             pins[key]['name'] = new_name
-            pins[key]['wattage'] = new_wattage
+            pins[key]['Wattage'] = new_wattage
             break
 
     template_data = {
