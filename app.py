@@ -21,6 +21,7 @@ db.create_all()
 
 # TODO: Move this into daily_usage class file
 class DailyUsage(db.Model):
+    __tablename__ = 'daily_usage'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     date = db.Column(db.String(80), unique=True, nullable=False)
     hours = db.Column(db.Integer, unique=False)
