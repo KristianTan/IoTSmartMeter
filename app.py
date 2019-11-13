@@ -45,7 +45,7 @@ if latest_entry:
 
 # Create dictionary to store pin info
 pins = {
-    25: {'name': 'Light', 'state': GPIO.LOW, 'on_time': None, 'on_date': None, 'Wattage': 5.4}
+    25: {'name': 'Light', 'state': GPIO.LOW, 'on_time': None, 'on_date': None, 'Wattage': 15}
 }
 
 # Setup each pin
