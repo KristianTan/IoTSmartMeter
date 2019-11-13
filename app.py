@@ -99,33 +99,31 @@ def main():
     for pin in pins:
         pins[pin]['state'] = GPIO.input(pin)
 
+    labels = []
+    values = []
+    max = 0
+
     records = DailyUsage.query.all()
     for record in records:
+        labels.append(record.date)
+        values.append(record.kWhUsed)
+        if record.kWhUsed > max:
+            max = record.kWhUsed
         print(record)
 
-    labels = [
-        'JAN', 'FEB', 'MAR', 'APR',
-        'MAY', 'JUN', 'JUL', 'AUG',
-        'SEP', 'OCT', 'NOV', 'DEC'
-    ]
-
-    values = [
-        967.67, 1190.89, 1079.75, 1349.19,
-        2328.91, 2504.28, 2873.83, 4764.87,
-        4349.29, 6458.30, 9907, 16297
-    ]
-
-    # Set the template data for the HTML template
     template_data = {
         'pins': pins,
         'daily_total': daily_total,
         'todays_cost': todays_cost,
         'cost_per_kWh': os.environ['cost_per_kWh'],
         'display_new_device_form': False,
-        'display_change_kWh': False
+        'display_change_kWh': False,
+        'labels': labels,
+        'values': values,
+        'max': max
     }
 
-    return render_template('main.html', **template_data, labels=labels, values=values)
+    return render_template('main.html', **template_data)
 
 
 @app.route("/toggle/<change_pin>")
