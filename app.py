@@ -89,11 +89,9 @@ def toggle_pin(change_pin):
             # If there is already an entry for today, update on time
             if latest_entry and latest_entry.date == start_date:
                 latest_entry.on_time_seconds += elapsed
-                daily_total = latest_entry.on_time_seconds
             else:
                 # If no entry for today, make one
                 entry = DailyUsage(date=start_date, on_time_seconds=elapsed)
-                daily_total = elapsed
                 db.session.add(entry)
             db.session.commit()
             pins[change_pin]['on_time'] = None
@@ -105,6 +103,12 @@ def toggle_pin(change_pin):
 
     for pin in pins:
         pins[pin]['state'] = GPIO.input(pin)
+
+    latest_entry = db.session.query(DailyUsage).order_by(DailyUsage.id.desc()).first()
+    if latest_entry and latest_entry.date == start_date:
+        daily_total = latest_entry.on_time_seconds
+    else :
+        daily_total = 0
 
     template_data = {
         'message': message,
