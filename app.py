@@ -37,7 +37,6 @@ class DailyUsage(db.Model):
 
 def get_todays_usage():
     latest_entry = DailyUsage.query.order_by(desc(DailyUsage.date)).first()
-    print(latest_entry)
     # latest_entry = db.session.query(DailyUsage).order_by(DailyUsage.date.asc()).first()
     if latest_entry:
         latest_entry_date = date(latest_entry.date.year, latest_entry.date.month, latest_entry.date.day)
@@ -76,7 +75,7 @@ def create_entry(change_pin):
 
 
 db.create_all()
-db.session.commit()
+
 daily_total = get_todays_usage()
 todays_cost = get_todays_cost()
 
@@ -99,12 +98,17 @@ labels = []
 values = []
 max = 0
 
+# Create data for chart
+count = 0
 records = DailyUsage.query.order_by(asc(DailyUsage.date)).all()
 for record in records:
     labels.append(date(record.date.year, record.date.month, record.date.day))
     values.append(record.kwhUsed)
     if record.kwhUsed > max:
         max = record.kwhUsed
+    count += 1
+    if count >= 7:
+        break
 
 @app.route("/")
 def main():
