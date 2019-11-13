@@ -47,8 +47,7 @@ def get_todays_usage():
 
 
 def get_todays_cost():
-    todays_cost = format(float(get_todays_usage()) * float(os.environ['cost_per_kWh']), '0.5f')
-    return None
+    return format(float(get_todays_usage()) * float(os.environ['cost_per_kWh']), '0.5f')
 
 
 # TODO: be able to query db by date
@@ -108,20 +107,10 @@ def toggle_pin(change_pin):
     for pin in pins:
         pins[pin]['state'] = GPIO.input(pin)
 
-    latest_entry = db.session.query(DailyUsage).order_by(DailyUsage.id.desc()).first()
-    if latest_entry:
-        latest_entry_date = date(latest_entry.date.year, latest_entry.date.month, latest_entry.date.day)
-        if latest_entry_date == datetime.today().date():
-            daily_total = format(latest_entry.kwhUsed, '.7f')
-    else:
-        daily_total = 0
-
-    todays_cost = format(float(daily_total) * float(os.environ['cost_per_kWh']), '0.5f')
-
     template_data = {
         'pins': pins,
-        'daily_total': daily_total,
-        'todays_cost': todays_cost
+        'daily_total': get_todays_usage(),
+        'todays_cost': get_todays_cost()
     }
 
     return render_template('main.html', **template_data)
