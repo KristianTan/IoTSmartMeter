@@ -16,7 +16,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
 db = SQLAlchemy(app)
-os.environ['cost_per_kWh'] = 0.1622
+os.environ['cost_per_kWh'] = '0.1622'
 
 # TODO: Move this into daily_usage class file
 class DailyUsage(db.Model):
@@ -44,7 +44,7 @@ if latest_entry:
     if latest_entry_date == datetime.today().date():
         daily_total = format(latest_entry.kwhUsed, '.7f')
 
-todays_cost = format(float(daily_total) * os.environ['cost_per_kWh'], '0.5f')
+todays_cost = format(float(daily_total) * float(os.environ['cost_per_kWh']), '0.5f')
 
 # Create dictionary to store pin info
 pins = {
@@ -100,7 +100,7 @@ def toggle_pin(change_pin):
     else:
         daily_total = 0
 
-    todays_cost = format(float(daily_total) * os.environ['cost_per_kWh'], '0.5f')
+    todays_cost = format(float(daily_total) * float(os.environ['cost_per_kWh']), '0.5f')
 
     template_data = {
         'pins': pins,
@@ -139,7 +139,7 @@ def create_entry(change_pin):
 @app.route('/handle_data', methods=['POST'])
 def handle_data():
     new_price = request.form['kWhprice']
-    os.environ['cost_per_kWh'] = new_price
+    os.environ['cost_per_kWh'] = str(new_price)
     template_data = {
         'pins': pins,
         'daily_total': daily_total,
