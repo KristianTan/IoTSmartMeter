@@ -107,7 +107,7 @@ def main():
     for record in records:
         labels.append(record.date)
         values.append(record.kwhUsed)
-        if record.kWhUsed > max:
+        if record.kwhUsed > max:
             max = record.kwhUsed
         print(record)
 
