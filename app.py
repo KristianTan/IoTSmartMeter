@@ -166,7 +166,7 @@ def add_new_device():
 @app.route('/handle_new_device', methods=['POST'])
 def handle_new_device():
     new_name = request.form['new_device_name']
-    new_wattage = request.form['new_device_wattage']
+    new_wattage = float(request.form['new_device_wattage'])
     for key in pins:
         if pins[key]['name'] is None:
             pins[key]['name'] = new_name
