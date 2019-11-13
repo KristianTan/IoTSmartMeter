@@ -12,15 +12,15 @@ body {
 .inputs {
     display: flex;
     flex-direction: row;
-    background-color: green;
-    height: 10%;
+    /*background-color: green;*/
+    /*height: 10%;*/
 }
 
 .containerRows {
     display: flex;
     flex-direction: row;
-    background-color: darkkhaki;
-    height: 90%;
+    /*background-color: darkkhaki;*/
+    /*height: 90%;*/
 }
 
 .device_list {
