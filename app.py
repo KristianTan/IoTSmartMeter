@@ -95,6 +95,7 @@ def toggle_pin(change_pin):
     else:
         daily_total = 0
 
+    print(float(daily_total))
     todays_cost = format(0.1622 * float(daily_total), '.2f')
     print(todays_cost)
     template_data = {
