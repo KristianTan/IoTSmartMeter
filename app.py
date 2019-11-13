@@ -84,7 +84,8 @@ def toggle_pin(change_pin):
             db.session.commit()
             pins[change_pin]['on_time'] = None
             print("==========")
-            print(DailyUsage.query.filter_by(id=1))
+            d = DailyUsage.query.filter_by(id=1)
+            print(d)
             print("==========")
     else:
         message += " on."
