@@ -87,13 +87,14 @@ def toggle_pin(change_pin):
             start_date = pins[change_pin]['on_date']
 
             # If there is already an entry for today, update on time
-            if latest_entry:
-                print(latest_entry.date)
-                print(start_date)
+            # if latest_entry:
+                # print(latest_entry.date)
+                # print(start_date)
             if latest_entry and latest_entry.date == start_date:
                 latest_entry.on_time_seconds += elapsed
             else:
                 # If no entry for today, make one
+                print(start_date)
                 entry = DailyUsage(date=start_date, on_time_seconds=elapsed)
                 db.session.add(entry)
             db.session.commit()
