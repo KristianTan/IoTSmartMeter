@@ -10,13 +10,12 @@
 
 <body>
     <div class="inputs">
-
-    </div>
-    <div class="containerRows">
         <form action="{{ url_for('handle_data') }}" method="post">
             <input type="text" name="kWhprice">
             <input type="submit">
         </form>
+    </div>
+    <div class="containerRows">
         <div class="device_list">
            <h3 class="device_list_title">Device Listing and Status</h3>
 
@@ -29,8 +28,6 @@
            {% endif %}
            </p>
            {% endfor %}
-
-
         </div>
 
         <div class="smart_meter">
