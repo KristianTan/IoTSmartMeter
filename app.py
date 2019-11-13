@@ -75,7 +75,9 @@ def toggle_pin(change_pin):
     if GPIO.input(change_pin) == 0:
         message += " off."
         uptime = datetime.now() - pins[change_pin]['on_time']
-        d = DailyUsage(date=pins[change_pin]['on_time'], hours=uptime)
+        uptime = datetime.strptime(uptime, '%b %d %Y %I:%M%p')
+        date = datetime.strptime(pins[change_pin]['on_time'], '%b %d %Y %I:%M%p')
+        d = DailyUsage(date=date, hours=uptime)
         db.session.add(d)
         db.session.commit()
         pins[change_pin]['on_time'] = None
