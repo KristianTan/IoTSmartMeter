@@ -2,7 +2,7 @@ from flask import Flask, render_template
 import RPi.GPIO as GPIO
 from flask_sqlalchemy import SQLAlchemy
 import os
-from datetime import datetime
+from datetime import datetime, date
 # from daily_usage import DailyUsage
 
 app = Flask(__name__)
@@ -102,7 +102,7 @@ def toggle_pin(change_pin):
     else:
         message += " on."
         pins[change_pin]['on_time'] = datetime.now()
-        pins[change_pin]['on_date'] = datetime.date.today()
+        pins[change_pin]['on_date'] = date.today()
 
     for pin in pins:
         pins[pin]['state'] = GPIO.input(pin)
