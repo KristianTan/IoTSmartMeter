@@ -104,8 +104,8 @@ def main():
         'daily_total': daily_total,
         'todays_cost': todays_cost,
         'cost_per_kWh': os.environ['cost_per_kWh'],
-        'display_form': False
-
+        'display_new_device_form': False,
+        'display_change_kWh': False
     }
 
     return render_template('main.html', **template_data)
@@ -139,7 +139,7 @@ def toggle_pin(change_pin):
     return render_template('main.html', **template_data)
 
 
-@app.route('/handle_data', methods=['POST'])
+@app.route('/handle_change_kWh', methods=['POST'])
 def handle_data():
     new_price = request.form['kWhprice']
     os.environ['cost_per_kWh'] = str(new_price)
@@ -159,7 +159,7 @@ def add_new_device():
         'daily_total': daily_total,
         'todays_cost': todays_cost,
         'cost_per_kWh': os.environ['cost_per_kWh'],
-        'display_form': True
+        'display_new_device_form': True
     }
     return render_template('main.html', **template_data)
 
@@ -181,6 +181,20 @@ def handle_new_device():
         'cost_per_kWh': os.environ['cost_per_kWh'],
     }
     return render_template('main.html', **template_data)
+
+
+@app.route("/update_info/kWh")
+def change_kWh():
+    template_data = {
+        'pins': pins,
+        'daily_total': daily_total,
+        'todays_cost': todays_cost,
+        'cost_per_kWh': os.environ['cost_per_kWh'],
+        'display_change_kWh': True
+    }
+    return render_template('main.html', **template_data)
+
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8090)
