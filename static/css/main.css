@@ -1,39 +1,42 @@
-body{
+body {
     font-family: "Roboto Thin";
 }
 
 .heading {
     text-decoration: underline;
     text-align: center;
-    background-color: aqua;
+    margin-bottom: 5%;
+    /*background-color: aqua;*/
 }
 
-.container{
+.container {
     display: flex;
     flex-direction: row;
-    background-color: red;
+    /*background-color: darkkhaki;*/
     height: 100%;
 }
 
-.device_list{
+.device_list {
     width: 25%;
-    background-color: red;
+    /*background-color: red;*/
+    margin-left: 5%;
+    text-align: left;
 }
 
-.spacer{
-    width: 5%;
-    background-color: green;
+.device_list_title {
+    text-decoration: underline;
 }
 
-.smart_meter{
-    width: 70%;
-    background-color: coral;
-}
-
-.display {
-    width: 80%;
-    height: 80%;
-    margin: 5%;
+.smart_meter {
+    width: 65%;
+    margin-right: 5%;
+    margin-left: 5%;
+    /*background-color: coral;*/
     border-style: solid;
     border-color: black;
+    border-width: 1px;
+}
+
+.smart_meter_info {
+    margin-left: 5%;
 }
