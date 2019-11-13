@@ -23,14 +23,14 @@ class DailyUsage(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     date = db.Column(db.DateTime, unique=True, nullable=False)
-    on_time = db.Column(db.String, unique=False)
+    on_time_seconds = db.Column(db.Integer, unique=False)
 
-    def __init__(self, date, on_time):
+    def __init__(self, date, on_time_seconds):
         self.date = date
-        self.on_time = on_time
+        self.on_time = on_time_seconds
 
     def __repr__(self):
-        return '<DailyUsage %r, %r, %r>' % (self.id, self.date, self.on_time)
+        return '<DailyUsage %r, %r, %r>' % (self.id, self.date, self.on_time_seconds)
 
 
 db.create_all()
@@ -73,13 +73,10 @@ def toggle_pin(change_pin):
         message += " off."
         if pins[change_pin]['on_time'] is not None:
             latest_entry = db.session.query(DailyUsage).order_by(DailyUsage.id.desc()).first()
-            print("========= LATEST")
-            print(latest_entry)
-            print("=========")
 
             start_time = pins[change_pin]['on_time']
             # Get the elapsed time and strip away milliseconds
-            elapsed = str(datetime.now() - start_time).split(".")[0]
+            elapsed = (datetime.now() - start_time).total_seconds()
 
             # Format the time
             start_date_string = datetime.strftime(start_time, '%Y-%m-%d')
@@ -87,10 +84,16 @@ def toggle_pin(change_pin):
             start_date = datetime.strptime(start_date_string, '%Y-%m-%d')
 
             if latest_entry.date == start_date:
-                print("SUCCESS")
+                print("SECS BEFORE UPDATE")
+                print(latest_entry.on_time_seconds)
+                latest_entry.on_time_seconds += elapsed
+                print("SECS AFTER UPDATE")
+                print(latest_entry.on_time_seconds)
+            else:
+                print("NEW ENTRY")
+                entry = DailyUsage(date=start_date, on_time_seconds=elapsed)
+                db.session.add(entry)
 
-            entry = DailyUsage(date=start_date, on_time=elapsed)
-            db.session.add(entry)
             db.session.commit()
 
             print("=========")
