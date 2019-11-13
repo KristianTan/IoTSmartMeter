@@ -60,7 +60,7 @@ def main():
 
     # Set the template data for the HTML template
     template_data = {
-        'pins': pins
+        'pins': pins,
         'daily_total': daily_total
     }
 
