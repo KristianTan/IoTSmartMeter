@@ -105,7 +105,7 @@ def toggle_pin(change_pin):
         pins[pin]['state'] = GPIO.input(pin)
 
     latest_entry = db.session.query(DailyUsage).order_by(DailyUsage.id.desc()).first()
-    if latest_entry and latest_entry.date == start_date:
+    if latest_entry and latest_entry.date == datetime.today():
         daily_total = latest_entry.on_time_seconds
     else :
         daily_total = 0
