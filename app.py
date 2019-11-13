@@ -149,7 +149,10 @@ def toggle_pin(change_pin):
         'pins': pins,
         'daily_total': get_todays_usage(),
         'todays_cost': get_todays_cost(),
-        'cost_per_kWh': os.environ['cost_per_kWh']
+        'cost_per_kWh': os.environ['cost_per_kWh'],
+        'labels': labels,
+        'values': values,
+        'max': max
     }
 
     return render_template('main.html', **template_data)
@@ -163,7 +166,10 @@ def handle_change_kWh():
         'pins': pins,
         'daily_total': daily_total,
         'todays_cost': todays_cost,
-        'cost_per_kWh': os.environ['cost_per_kWh']
+        'cost_per_kWh': os.environ['cost_per_kWh'],
+        'labels': labels,
+        'values': values,
+        'max': max
     }
     return render_template('main.html', **template_data)
 
@@ -175,7 +181,10 @@ def add_new_device():
         'daily_total': daily_total,
         'todays_cost': todays_cost,
         'cost_per_kWh': os.environ['cost_per_kWh'],
-        'display_new_device_form': True
+        'display_new_device_form': True,
+        'labels': labels,
+        'values': values,
+        'max': max
     }
     return render_template('main.html', **template_data)
 
@@ -195,6 +204,9 @@ def handle_new_device():
         'daily_total': daily_total,
         'todays_cost': todays_cost,
         'cost_per_kWh': os.environ['cost_per_kWh'],
+        'labels': labels,
+        'values': values,
+        'max': max
     }
     return render_template('main.html', **template_data)
 
@@ -213,6 +225,9 @@ def delete_pin(delete_pin):
         'daily_total': daily_total,
         'todays_cost': todays_cost,
         'cost_per_kWh': os.environ['cost_per_kWh'],
+        'labels': labels,
+        'values': values,
+        'max': max
     }
     return render_template('main.html', **template_data)
 
@@ -223,7 +238,10 @@ def change_kWh():
         'daily_total': daily_total,
         'todays_cost': todays_cost,
         'cost_per_kWh': os.environ['cost_per_kWh'],
-        'display_change_kWh': True
+        'display_change_kWh': True,
+        'labels': labels,
+        'values': values,
+        'max': max
     }
     return render_template('main.html', **template_data)
 
