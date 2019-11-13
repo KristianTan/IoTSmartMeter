@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 import RPi.GPIO as GPIO
 from flask_sqlalchemy import SQLAlchemy
-
+from sqlalchemy import desc
 import os
 from datetime import datetime, date, timedelta
 # from daily_usage import DailyUsage
@@ -74,10 +74,6 @@ def create_entry(change_pin):
 
 
 db.create_all()
-db.session.add(DailyUsage(date=date(2019, 11, 11), kwhUsed=6.7))
-db.session.add(DailyUsage(date=date(2019, 11, 10), kwhUsed=9.2))
-db.session.add(DailyUsage(date=date(2019, 11, 9), kwhUsed=8.4))
-db.session.add(DailyUsage(date=date(2019, 11, 8), kwhUsed=9))
 db.session.commit()
 daily_total = get_todays_usage()
 todays_cost = get_todays_cost()
@@ -107,7 +103,7 @@ def main():
     values = []
     max = 0
 
-    records = DailyUsage.query.all()
+    records = DailyUsage.query.order_by(desc(DailyUsage.date)).all()
     for record in records:
         labels.append(date(record.date.year, record.date.month, record.date.day))
         values.append(record.kwhUsed)
