@@ -79,7 +79,7 @@ def toggle_pin(change_pin):
             d = DailyUsage(date=pins[change_pin]['on_time'], hours=uptime)
 
             print("===========")
-            print("DAILYUSAGE: " + d)
+            print("DAILYUSAGE: " + d.id + ", " + d.date + ", " + d.hours)
             print("===========")
 
             db.session.add(d)
@@ -88,7 +88,7 @@ def toggle_pin(change_pin):
 
             print("==========")
             e = DailyUsage.query.filter_by(id=1)
-            print("DB ENTRY: " + e)
+            print("DB ENTRY: " + e.id + ", " + e.date + ", " + e.hours)
             print("==========")
     else:
         message += " on."
