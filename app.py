@@ -115,6 +115,7 @@ def create_entry(change_pin):
     elapsed = int((datetime.now() - start_time).total_seconds())
     start_date = pins[change_pin]['on_date']
     kwh = pins[change_pin]['Wattage'] * (elapsed / 3600) / 1000
+    print(kwh)
 
     # If there is already an entry for today, update on time
     # if latest_entry:
