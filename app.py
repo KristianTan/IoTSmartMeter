@@ -29,7 +29,7 @@ class DailyUsage(db.Model):
         self.hours = hours
 
     def __repr__(self):
-        return '<DailyUsage %r>' % self.id
+        return '<DailyUsage %r>' % self.date
 
 
 db.create_all()
