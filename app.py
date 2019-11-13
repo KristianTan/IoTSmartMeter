@@ -73,7 +73,7 @@ def toggle_pin(change_pin):
         message += " off."
         if pins[change_pin]['on_time'] is not None:
             start_time = pins[change_pin]['on_time']
-            elapsed = str(datetime.now() - start_time)
+            elapsed = str(datetime.now() - start_time).split(".")[0]
 
             # Format the time
             start_date_string = datetime.strftime(start_time, '%Y-%m-%d')
