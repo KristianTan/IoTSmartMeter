@@ -12,6 +12,9 @@ body {
 .inputs {
     display: flex;
     flex-direction: row;
+    margin-right: 5%;
+    margin-left: 5%;
+    margin-bottom: 10%;
     /*background-color: green;*/
     /*height: 10%;*/
 }
