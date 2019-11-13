@@ -76,6 +76,7 @@ def toggle_pin(change_pin):
         message += " off."
         if pins[change_pin]['on_time'] is not None:
             uptime = str(datetime.now() - pins[change_pin]['on_time'])
+            date = pins[change_pin]['on_time']
             d = DailyUsage(date=pins[change_pin]['on_time'], hours=uptime)
             db.session.add(d)
             db.session.commit()
@@ -87,7 +88,7 @@ def toggle_pin(change_pin):
             pins[change_pin]['on_time'] = None
 
             print("==========")
-            e = DailyUsage.query.filter_by(id=1)
+            e = DailyUsage.query.filter_by(date=date)
             print(e)
             print("==========")
     else:
