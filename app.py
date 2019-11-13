@@ -36,15 +36,31 @@ class DailyUsage(db.Model):
 
 db.create_all()
 
-# TODO: be able to query db by date
-daily_total = 0
-latest_entry = db.session.query(DailyUsage).order_by(DailyUsage.id.desc()).first()
-if latest_entry:
-    latest_entry_date = date(latest_entry.date.year, latest_entry.date.month, latest_entry.date.day)
-    if latest_entry_date == datetime.today().date():
-        daily_total = format(latest_entry.kwhUsed, '.7f')
 
-todays_cost = format(float(daily_total) * float(os.environ['cost_per_kWh']), '0.5f')
+def get_todays_usage():
+    latest_entry = db.session.query(DailyUsage).order_by(DailyUsage.id.desc()).first()
+    if latest_entry:
+        latest_entry_date = date(latest_entry.date.year, latest_entry.date.month, latest_entry.date.day)
+        if latest_entry_date == datetime.today().date():
+            return format(latest_entry.kwhUsed, '.7f')
+    return 0
+
+
+def get_todays_cost():
+    todays_cost = format(float(get_todays_usage()) * float(os.environ['cost_per_kWh']), '0.5f')
+    return None
+
+
+# TODO: be able to query db by date
+daily_total = get_todays_usage()
+todays_cost = get_todays_cost()
+# latest_entry = db.session.query(DailyUsage).order_by(DailyUsage.id.desc()).first()
+# if latest_entry:
+#     latest_entry_date = date(latest_entry.date.year, latest_entry.date.month, latest_entry.date.day)
+#     if latest_entry_date == datetime.today().date():
+#         daily_total = format(latest_entry.kwhUsed, '.7f')
+#
+# todays_cost = format(float(daily_total) * float(os.environ['cost_per_kWh']), '0.5f')
 
 # Create dictionary to store pin info
 pins = {
@@ -150,7 +166,12 @@ def handle_data():
 
 @app.route("/devices/add_device")
 def add_new_device():
-    pass
+    template_data = {
+        'pins': pins,
+        'daily_total': daily_total,
+        'todays_cost': todays_cost
+    }
+    return render_template('main.html', **template_data)
 
 
 if __name__ == '__main__':
