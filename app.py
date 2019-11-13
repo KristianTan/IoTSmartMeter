@@ -94,7 +94,7 @@ def toggle_pin(change_pin):
                 latest_entry.on_time_seconds += elapsed
             else:
                 # If no entry for today, make one
-                entry = DailyUsage(date=start_date, on_time_seconds=elapsed)
+                entry = DailyUsage(date=start_date.date(), on_time_seconds=elapsed)
                 db.session.add(entry)
             db.session.commit()
             pins[change_pin]['on_time'] = None
