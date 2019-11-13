@@ -22,7 +22,7 @@ class DailyUsage(db.Model):
     __tablename__ = 'daily_usage'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     date = db.Column(db.DateTime, unique=True, nullable=False)
-    hours = db.Column(db.Integer, unique=False)
+    hours = db.Column(db.String, unique=False)
 
     def __init__(self, date, hours):
         self.date = date
@@ -75,8 +75,10 @@ def toggle_pin(change_pin):
     if GPIO.input(change_pin) == 0:
         message += " off."
         if pins[change_pin]['on_time'] is not None:
-            uptime = datetime.now() - pins[change_pin]['on_time']
-            uptime = datetime.strptime(uptime, '%b %d %Y %I:%M%p')
+            uptime = str(datetime.now() - pins[change_pin]['on_time'])
+            print("===========")
+            print("UPTIME STRING: " + uptime)
+            print("===========")
             date = datetime.strptime(pins[change_pin]['on_time'], '%b %d %Y %I:%M%p')
             d = DailyUsage(date=date, hours=uptime)
             db.session.add(d)
