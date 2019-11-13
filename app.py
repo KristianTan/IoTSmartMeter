@@ -23,14 +23,14 @@ class DailyUsage(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     date = db.Column(db.DateTime, unique=True, nullable=False)
-    on_time_seconds = db.Column(db.Integer, unique=False)
+    kwhUsed = db.Column(db.Float, unique=False)
 
-    def __init__(self, date, on_time_seconds):
+    def __init__(self, date, kwhUsed):
         self.date = date
-        self.on_time_seconds = on_time_seconds
+        self.kwhUsed = kwhUsed
 
     def __repr__(self):
-        return '<DailyUsage %r, %r, %r>' % (self.id, self.date, self.on_time_seconds)
+        return '<DailyUsage %r, %r, %r>' % (self.id, self.date, self.kwhUsed)
 
 
 db.create_all()
@@ -41,7 +41,7 @@ latest_entry = db.session.query(DailyUsage).order_by(DailyUsage.id.desc()).first
 if latest_entry:
     latest_entry_date = date(latest_entry.date.year, latest_entry.date.month, latest_entry.date.day)
     if latest_entry_date == datetime.today().date():
-        daily_total = timedelta(seconds=latest_entry.on_time_seconds)
+        daily_total = timedelta(seconds=latest_entry.kwhUsed)
 
 # Create dictionary to store pin info
 pins = {
@@ -82,25 +82,6 @@ def toggle_pin(change_pin):
         message += " off."
         if pins[change_pin]['on_time'] is not None:
             create_entry(change_pin)
-            # latest_entry = db.session.query(DailyUsage).order_by(DailyUsage.id.desc()).first()
-            # start_time = pins[change_pin]['on_time']
-            # # Get the elapsed time and strip away milliseconds
-            # elapsed = int((datetime.now() - start_time).total_seconds())
-            # start_date = pins[change_pin]['on_date']
-            #
-            # # If there is already an entry for today, update on time
-            # # if latest_entry:
-            # if latest_entry:
-            #     latest_entry_date = date(latest_entry.date.year, latest_entry.date.month, latest_entry.date.day)
-            #     if latest_entry_date == start_date:
-            #         latest_entry.on_time_seconds += elapsed
-            # else:
-            #     # If no entry for today, make one
-            #     entry = DailyUsage(date=start_date, on_time_seconds=elapsed)
-            #     db.session.add(entry)
-            # db.session.commit()
-            # pins[change_pin]['on_time'] = None
-            # pins[change_pin]['on_date'] = None
     else:
         message += " on."
         pins[change_pin]['on_time'] = datetime.now()
@@ -113,7 +94,7 @@ def toggle_pin(change_pin):
     if latest_entry:
         latest_entry_date = date(latest_entry.date.year, latest_entry.date.month, latest_entry.date.day)
         if latest_entry_date == datetime.today().date():
-            daily_total = timedelta(seconds=latest_entry.on_time_seconds)
+            daily_total = timedelta(seconds=latest_entry.kwhUsed)
     else:
         daily_total = 0
 
@@ -126,22 +107,24 @@ def toggle_pin(change_pin):
 
     return render_template('main.html', **template_data)
 
+
 def create_entry(change_pin):
     latest_entry = db.session.query(DailyUsage).order_by(DailyUsage.id.desc()).first()
     start_time = pins[change_pin]['on_time']
     # Get the elapsed time and strip away milliseconds
     elapsed = int((datetime.now() - start_time).total_seconds())
     start_date = pins[change_pin]['on_date']
+    kwh = pins[change_pin]['Wattage'] * (elapsed / 3600) / 1000
 
     # If there is already an entry for today, update on time
     # if latest_entry:
     if latest_entry:
         latest_entry_date = date(latest_entry.date.year, latest_entry.date.month, latest_entry.date.day)
         if latest_entry_date == start_date:
-            latest_entry.on_time_seconds += elapsed
+            latest_entry.kwhUsed += kwh
     else:
         # If no entry for today, make one
-        entry = DailyUsage(date=start_date, on_time_seconds=elapsed)
+        entry = DailyUsage(date=start_date, kwhUsed=kwh)
         db.session.add(entry)
     db.session.commit()
     pins[change_pin]['on_time'] = None
