@@ -108,7 +108,7 @@ def main():
         labels.append(record.date)
         values.append(record.kwhUsed)
         if record.kWhUsed > max:
-            max = record.kWhUsed
+            max = record.kwhUsed
         print(record)
 
     template_data = {
