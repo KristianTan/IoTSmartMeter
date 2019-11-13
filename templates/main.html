@@ -52,6 +52,16 @@
             Change cost per kWh: <input type="text" name="kWhprice">
             <input type="submit">
         </form>
+
+        <div class=".add_new_device_form">
+            {% if display_form == True %}
+                <form action="{{ url_for('handle_new_device') }}" method="post">
+                    New device name: <input type="text" name="new_device_name">
+                    New device wattage: <input type="number" name="new_device_wattage">
+                    <input type="submit">
+                </form>
+            {% endif %}
+        </div>
     </div>
 </body>
 

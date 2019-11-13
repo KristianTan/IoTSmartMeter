@@ -154,10 +154,24 @@ def add_new_device():
         'pins': pins,
         'daily_total': daily_total,
         'todays_cost': todays_cost,
-        'cost_per_kWh': os.environ['cost_per_kWh']
+        'cost_per_kWh': os.environ['cost_per_kWh'],
+        'display_form': True
     }
     return render_template('main.html', **template_data)
 
+@app.route('/handle_new_device', methods=['POST'])
+def handle_new_device():
+    new_name = request.form['new_device_name']
+    new_wattage = request.form['new_device_wattage']
+    print(new_name)
+    print(new_wattage)
+    template_data = {
+        'pins': pins,
+        'daily_total': daily_total,
+        'todays_cost': todays_cost,
+        'cost_per_kWh': os.environ['cost_per_kWh'],
+    }
+    return render_template('main.html', **template_data)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8090)
