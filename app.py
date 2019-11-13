@@ -167,7 +167,7 @@ def add_new_device():
 def handle_new_device():
     new_name = request.form['new_device_name']
     new_wattage = request.form['new_device_wattage']
-    for key in dict:
+    for key in pins:
         if pins[key].name != None:
             pins[key]['name'] = new_name
             pins[key]['wattage'] = new_wattage
