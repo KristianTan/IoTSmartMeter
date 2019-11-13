@@ -39,7 +39,7 @@ db.create_all()
 daily_total = 0
 latest_entry = db.session.query(DailyUsage).order_by(DailyUsage.id.desc()).first()
 if latest_entry and latest_entry.date == datetime.today():
-    daily_total = latest_entry.on_time_seconds
+    daily_total += latest_entry.on_time_seconds
 
 
 # Create dictionary to store pin info
@@ -81,25 +81,23 @@ def toggle_pin(change_pin):
         message += " off."
         if pins[change_pin]['on_time'] is not None:
             latest_entry = db.session.query(DailyUsage).order_by(DailyUsage.id.desc()).first()
-
             start_time = pins[change_pin]['on_time']
             # Get the elapsed time and strip away milliseconds
             elapsed = int((datetime.now() - start_time).total_seconds())
-
             start_date = pins[change_pin]['on_date']
 
             # If there is already an entry for today, update on time
             if latest_entry and latest_entry.date == start_date:
                 latest_entry.on_time_seconds += elapsed
+                daily_total = latest_entry.on_time_seconds
             else:
                 # If no entry for today, make one
                 entry = DailyUsage(date=start_date, on_time_seconds=elapsed)
+                daily_total = elapsed
                 db.session.add(entry)
-
             db.session.commit()
             pins[change_pin]['on_time'] = None
             pins[change_pin]['on_date'] = None
-
     else:
         message += " on."
         pins[change_pin]['on_time'] = datetime.now()
