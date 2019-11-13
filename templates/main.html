@@ -13,15 +13,20 @@
         <div class="device_list">
            <h3 class="device_list_title">Device Listing and Status</h3>
 
-           {% for pin in pins %}
-           <p>{{ pins[pin].name }} :
-           {% if pins[pin].state == true %}
+            {% for pin in pins %}
+               <p>{{ pins[pin].name }} :
+               {% if pins[pin].state == true %}
               (<a href="/toggle/{{pin}}">turn off</a>)
-           {% else %}
-              (<a href="/toggle/{{pin}}">turn on</a>)
-           {% endif %}
-           </p>
-           {% endfor %}
+               {% else %}
+                   (<a href="/toggle/{{pin}}">turn on</a>)
+               {% endif %}
+               </p>
+
+                <p><a href="/devices/add_device">Add device</a></p>
+            {% endfor %}
+
+            <p></p>
+
         </div>
 
         <div class="smart_meter">
@@ -42,7 +47,7 @@
         </div>
     </div>
     <div class="inputs">
-        <form action="{{ url_for('handle_data') }}" method="post">
+        <form action="{{ url_for('handle_data/update_kWh') }}" method="post">
             Change cost per kWh: <input type="text" name="kWhprice">
             <input type="submit">
         </form>

@@ -136,7 +136,7 @@ def create_entry(change_pin):
     pins[change_pin]['on_date'] = None
 
 
-@app.route('/handle_data', methods=['POST'])
+@app.route('/handle_data/update_kWh', methods=['POST'])
 def handle_data():
     new_price = request.form['kWhprice']
     os.environ['cost_per_kWh'] = str(new_price)
@@ -147,6 +147,9 @@ def handle_data():
     }
     return render_template('main.html', **template_data)
 
+@app.route("/devices/add_device")
+def add_new_device():
+    pass
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8090)
