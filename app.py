@@ -80,8 +80,8 @@ todays_cost = get_todays_cost()
 # Create dictionary to store pin info
 pins = {
     25: {'name': 'Light', 'state': GPIO.LOW, 'on_time': None, 'on_date': None, 'Wattage': 15},
-    28: {'name': 'None', 'state': GPIO.LOW, 'on_time': None, 'on_date': None, 'Wattage': 15},
-    27: {'name': 'None', 'state': GPIO.LOW, 'on_time': None, 'on_date': None, 'Wattage': 15}
+    28: {'name': None, 'state': GPIO.LOW, 'on_time': None, 'on_date': None, 'Wattage': 0},
+    27: {'name': None, 'state': GPIO.LOW, 'on_time': None, 'on_date': None, 'Wattage': 0}
 }
 
 
@@ -167,8 +167,12 @@ def add_new_device():
 def handle_new_device():
     new_name = request.form['new_device_name']
     new_wattage = request.form['new_device_wattage']
-    print(new_name)
-    print(new_wattage)
+    for key in dict:
+        if pins[key].name != None:
+            pins[key]['name'] = new_name
+            pins[key]['wattage'] = new_wattage
+            break
+
     template_data = {
         'pins': pins,
         'daily_total': daily_total,
