@@ -79,7 +79,10 @@ def toggle_pin(change_pin):
     else:
         message += " on."
         pins[change_pin]['on_time'] = datetime.datetime.now()
+        print("==================")
+        print("HERE IS THE PIN DATA: ")
         print(pins[change_pin])
+        print("==================")
 
     for pin in pins:
         pins[pin]['state'] = GPIO.input(pin)
