@@ -23,7 +23,7 @@ db.create_all()
 class DailyUsage(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     date = db.Column(db.String(80), unique=True, nullable=False)
-    hours = db.Column(db.Integer(120), unique=False)
+    hours = db.Column(db.Integer, unique=False)
 
     def __init__(self, date_, hours_):
         self.date = date_
