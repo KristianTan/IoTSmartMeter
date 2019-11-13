@@ -35,6 +35,12 @@ class DailyUsage(db.Model):
 
 db.create_all()
 
+daily_total = 0
+latest_entry = db.session.query(DailyUsage).order_by(DailyUsage.id.desc()).first()
+if latest_entry and latest_entry.date == datetime.today():
+    daily_total = latest_entry.on_time_seconds
+
+
 # Create dictionary to store pin info
 pins = {
     25: {'name': 'Light', 'state': GPIO.LOW, 'on_time': None}
@@ -83,24 +89,15 @@ def toggle_pin(change_pin):
             # Create datetime object from formatted time
             start_date = datetime.strptime(start_date_string, '%Y-%m-%d')
 
+            # If there is already an entry for today, update on time
             if latest_entry and latest_entry.date == start_date:
-                print("SECS BEFORE UPDATE")
-                print(latest_entry.on_time_seconds)
                 latest_entry.on_time_seconds += elapsed
-                print("SECS AFTER UPDATE")
-                print(latest_entry.on_time_seconds)
             else:
-                print("NEW ENTRY")
+                # If no entry for today, make one
                 entry = DailyUsage(date=start_date, on_time_seconds=elapsed)
-                print(entry.on_time_seconds)
                 db.session.add(entry)
 
             db.session.commit()
-
-            print("=========")
-            print(DailyUsage.query.all())
-            print("=========")
-
             pins[change_pin]['on_time'] = None
     else:
         message += " on."
