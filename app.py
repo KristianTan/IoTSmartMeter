@@ -3,11 +3,14 @@ import RPi.GPIO as GPIO
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 import os
+
 # from daily_usage import DailyUsage
 
 app = Flask(__name__)
 os.environ['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///energyUsage'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
+# To suppress warnings
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -15,18 +18,21 @@ GPIO.setwarnings(False)
 db = SQLAlchemy(app)
 db.create_all()
 
+
 # TODO: Move this into daily_usage class file
 class DailyUsage(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     date = db.Column(db.String(80), unique=True, nullable=False)
     hours = db.Column(db.Integer(120), unique=False)
 
-    def __repr__(self):
-        return '<DailyUsage %r>' % self.id
-
     def __init__(self, date_, hours_):
         self.date = date_
         self.hours = hours_
+
+    def __repr__(self):
+        return '<DailyUsage %r>' % self.id
+
+
 
 
 test = DailyUsage(date="12/11/2019", hours=5)
@@ -38,7 +44,6 @@ print(DailyUsage.query.all())
 pins = {
     25: {'name': 'Light', 'state': GPIO.LOW}
 }
-
 
 # Setup each pin
 for pin in pins:
