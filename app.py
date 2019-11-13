@@ -95,22 +95,22 @@ for pin in pins:
     GPIO.output(pin, GPIO.LOW)
 
 
+labels = []
+values = []
+max = 0
+
+records = DailyUsage.query.order_by(asc(DailyUsage.date)).all()
+for record in records:
+    labels.append(date(record.date.year, record.date.month, record.date.day))
+    values.append(record.kwhUsed)
+    if record.kwhUsed > max:
+        max = record.kwhUsed
+
 @app.route("/")
 def main():
     # For each pin, read the pin state and store it in the pins dictionary:
     for pin in pins:
         pins[pin]['state'] = GPIO.input(pin)
-
-    labels = []
-    values = []
-    max = 0
-
-    records = DailyUsage.query.order_by(asc(DailyUsage.date)).all()
-    for record in records:
-        labels.append(date(record.date.year, record.date.month, record.date.day))
-        values.append(record.kwhUsed)
-        if record.kwhUsed > max:
-            max = record.kwhUsed
 
     template_data = {
         'pins': pins,
