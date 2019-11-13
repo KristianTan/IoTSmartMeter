@@ -20,10 +20,11 @@
                         {{ pins[pin].name }} :
                     {% if pins[pin].state == true %}
                         (<a href="/toggle/{{pin}}">turn off</a>)
+                        (<a href="/remove/{{pin}}">remove</a>)
                     {% else %}
                         (<a href="/toggle/{{pin}}">turn on</a>)
+                    (<a href="/remove/{{pin}}">remove</a>)
                     </p>
-                        (<a href="/remove/{{pin}}">remove</a>)
                     {% endif %}
                 {% endif %}
             {% endfor %}
