@@ -30,6 +30,23 @@
             {% endfor %}
             <p><a href="/devices/add_device">Add device</a></p>
 
+         {% if display_change_kWh == True %}
+            <form action="{{ url_for('handle_change_kWh') }}" method="post">
+                Change cost per kWh: <input type="text" name="kWhprice" required>
+                <input type="submit">
+            </form>
+        {% endif %}
+
+        {% if display_new_device_form == True %}
+            <div class=".add_new_device_form">
+                    <form action="{{ url_for('handle_new_device') }}" method="post">
+                        New device name: <input type="text" name="new_device_name" required> <br>
+                        New device wattage: <input type="number" name="new_device_wattage" required> <br>
+                        <input type="submit">
+                    </form>
+            </div>
+        {% endif %}
+
         </div>
 
         <div class="smart_meter">
@@ -94,22 +111,22 @@
         </div>
     </div>
     <div class="inputs">
-        {% if display_change_kWh == True %}
-            <form action="{{ url_for('handle_change_kWh') }}" method="post">
-                Change cost per kWh: <input type="text" name="kWhprice" required>
-                <input type="submit">
-            </form>
-        {% endif %}
-
-        {% if display_new_device_form == True %}
-            <div class=".add_new_device_form">
-                    <form action="{{ url_for('handle_new_device') }}" method="post">
-                        New device name: <input type="text" name="new_device_name" required> <br>
-                        New device wattage: <input type="number" name="new_device_wattage" required> <br>
-                        <input type="submit">
-                    </form>
-            </div>
-        {% endif %}
+{#        {% if display_change_kWh == True %}#}
+{#            <form action="{{ url_for('handle_change_kWh') }}" method="post">#}
+{#                Change cost per kWh: <input type="text" name="kWhprice" required>#}
+{#                <input type="submit">#}
+{#            </form>#}
+{#        {% endif %}#}
+{##}
+{#        {% if display_new_device_form == True %}#}
+{#            <div class=".add_new_device_form">#}
+{#                    <form action="{{ url_for('handle_new_device') }}" method="post">#}
+{#                        New device name: <input type="text" name="new_device_name" required> <br>#}
+{#                        New device wattage: <input type="number" name="new_device_wattage" required> <br>#}
+{#                        <input type="submit">#}
+{#                    </form>#}
+{#            </div>#}
+{#        {% endif %}#}
 
     </div>
 </body>
