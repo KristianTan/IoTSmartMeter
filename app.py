@@ -188,7 +188,8 @@ def delete_pin(delete_pin):
     delete_pin = int(delete_pin)
     for key in pins:
         if key == delete_pin:
-            pins.pop(delete_pin)
+            pins[delete_pin]['name'] = None
+            pins[delete_pin]['Wattage'] = None
             break
 
     template_data = {
