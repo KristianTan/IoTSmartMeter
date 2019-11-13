@@ -83,7 +83,7 @@ def toggle_pin(change_pin):
             # Create datetime object from formatted time
             start_date = datetime.strptime(start_date_string, '%Y-%m-%d')
 
-            if latest_entry.date == start_date:
+            if latest_entry and latest_entry.date == start_date:
                 print("SECS BEFORE UPDATE")
                 print(latest_entry.on_time_seconds)
                 latest_entry.on_time_seconds += elapsed
