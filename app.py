@@ -15,7 +15,7 @@ GPIO.setwarnings(False)
 db = SQLAlchemy(app)
 db.create_all()
 
-
+# TODO: Move this into daily_usage class file
 class DailyUsage(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     date = db.Column(db.String(80), unique=True, nullable=False)
@@ -24,8 +24,12 @@ class DailyUsage(db.Model):
     def __repr__(self):
         return '<DailyUsage %r>' % self.id
 
+    def __init__(self, date_, hours_):
+        self.date = date_
+        self.hours = hours_
 
-test = DailyUsage("12/11/2019", 5)
+
+test = DailyUsage(date="12/11/2019", hours=5)
 db.session.add(test)
 db.session.commit()
 print(DailyUsage.query.all())
