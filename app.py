@@ -33,7 +33,6 @@ class DailyUsage(db.Model):
 
 
 db.create_all()
-DailyUsage.query().delete()
 
 # Create dictionary to store pin info
 pins = {
