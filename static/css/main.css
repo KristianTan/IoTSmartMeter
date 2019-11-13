@@ -9,11 +9,18 @@ body {
     /*background-color: aqua;*/
 }
 
-.container {
+.containerRows {
     display: flex;
     flex-direction: row;
-    /*background-color: darkkhaki;*/
-    height: 100%;
+    background-color: darkkhaki;
+    height: 90%;
+}
+
+.containerCols {
+    display: flex;
+    flex-direction: column;
+    height: 10%;
+    background-color: green;
 }
 
 .device_list {
