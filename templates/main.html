@@ -32,7 +32,7 @@
         <div class="smart_meter">
             <div class="smart_meter_info">
 {#            Implement some way to display "No devices" message if none are in use#}
-                <p> Cost per kWh: £{{ cost_per_kWh }}</p>
+                <p> Cost per kWh: £{{ cost_per_kWh }} <a href="/update_info/kWh"> (Update)</a></p>
                 <p> Total energy used today: {{ daily_total }} kWh.</p>
                 <p> Total cost of today's energy usage: £{{ todays_cost }}</p>
 
@@ -48,12 +48,14 @@
         </div>
     </div>
     <div class="inputs">
-        <form action="{{ url_for('handle_data') }}" method="post">
-            Change cost per kWh: <input type="text" name="kWhprice">
-            <input type="submit">
-        </form>
+        {% if display_change_kWh == True %}
+            <form action="{{ url_for('handle_change_kWh') }}" method="post">
+                Change cost per kWh: <input type="text" name="kWhprice">
+                <input type="submit">
+            </form>
+        {% endif %}
 
-        {% if display_form == True %}
+        {% if display_new_device_form == True %}
             <div class=".add_new_device_form">
                     <form action="{{ url_for('handle_new_device') }}" method="post">
                         New device name: <input type="text" name="new_device_name"> <br>
