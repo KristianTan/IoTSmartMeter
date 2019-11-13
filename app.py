@@ -77,8 +77,6 @@ def toggle_pin(change_pin):
             start_time = pins[change_pin]['on_time']
             # Get the elapsed time and strip away milliseconds
             elapsed = int((datetime.now() - start_time).total_seconds())
-            print("SECS")
-            print(elapsed)
 
             # Format the time
             start_date_string = datetime.strftime(start_time, '%Y-%m-%d')
@@ -93,6 +91,8 @@ def toggle_pin(change_pin):
                 print(latest_entry.on_time_seconds)
             else:
                 print("NEW ENTRY")
+                print("SECS")
+                print(elapsed)
                 entry = DailyUsage(date=start_date, on_time_seconds=elapsed)
                 db.session.add(entry)
 
