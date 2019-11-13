@@ -79,7 +79,9 @@ todays_cost = get_todays_cost()
 
 # Create dictionary to store pin info
 pins = {
-    25: {'name': 'Light', 'state': GPIO.LOW, 'on_time': None, 'on_date': None, 'Wattage': 15}
+    25: {'name': 'Light', 'state': GPIO.LOW, 'on_time': None, 'on_date': None, 'Wattage': 15},
+    28: {'name': None, 'state': GPIO.LOW, 'on_time': None, 'on_date': None, 'Wattage': 15},
+    27: {'name': None, 'state': GPIO.LOW, 'on_time': None, 'on_date': None, 'Wattage': 15}
 }
 
 
@@ -159,6 +161,7 @@ def add_new_device():
         'display_form': True
     }
     return render_template('main.html', **template_data)
+
 
 @app.route('/handle_new_device', methods=['POST'])
 def handle_new_device():
