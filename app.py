@@ -74,13 +74,13 @@ def toggle_pin(change_pin):
         if pins[change_pin]['on_time'] is not None:
             start_time = pins[change_pin]['on_time']
             elapsed = str(datetime.now() - start_time)
-            date = start_time.date()
+            date = datetime.strptime(start_time, '%Y-%m-%d').date()
             entry = DailyUsage(date=date, on_time=elapsed)
             db.session.add(entry)
             db.session.commit()
 
             print("=========")
-            DailyUsage.query.all()
+            print(DailyUsage.query.all())
             print("=========")
 
             pins[change_pin]['on_time'] = None
