@@ -183,6 +183,20 @@ def handle_new_device():
     return render_template('main.html', **template_data)
 
 
+@app.route('/delete/<delete_pin')
+def delete_pin(delete_pin):
+    for key in pins:
+        if key == delete_pin:
+            pins.pop(delete_pin)
+
+    template_data = {
+        'pins': pins,
+        'daily_total': daily_total,
+        'todays_cost': todays_cost,
+        'cost_per_kWh': os.environ['cost_per_kWh'],
+    }
+    return render_template('main.html', **template_data)
+
 @app.route("/update_info/kWh")
 def change_kWh():
     template_data = {
@@ -193,7 +207,6 @@ def change_kWh():
         'display_change_kWh': True
     }
     return render_template('main.html', **template_data)
-
 
 
 if __name__ == '__main__':
