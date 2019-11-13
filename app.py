@@ -105,11 +105,10 @@ def main():
 
     records = DailyUsage.query.all()
     for record in records:
-        labels.append(record.date)
+        labels.append(date(record.date.year, record.date.month, record.date.day))
         values.append(record.kwhUsed)
         if record.kwhUsed > max:
             max = record.kwhUsed
-        print(max)
 
     template_data = {
         'pins': pins,
