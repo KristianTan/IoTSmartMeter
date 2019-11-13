@@ -100,7 +100,8 @@ def main():
         'pins': pins,
         'daily_total': daily_total,
         'todays_cost': todays_cost,
-        'cost_per_kWh': os.environ['cost_per_kWh']
+        'cost_per_kWh': os.environ['cost_per_kWh'],
+        'display_form': False
 
     }
 
