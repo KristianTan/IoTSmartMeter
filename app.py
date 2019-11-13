@@ -30,7 +30,7 @@ class DailyUsage(db.Model):
         self.on_time = on_time
 
     def __repr__(self):
-        return '<DailyUsage %r>' % self.date
+        return '<DailyUsage %r, %r, %r>' % self.id, self.date, self.on_time
 
 
 db.create_all()
@@ -74,7 +74,9 @@ def toggle_pin(change_pin):
         if pins[change_pin]['on_time'] is not None:
             start_time = pins[change_pin]['on_time']
             elapsed = str(datetime.now() - start_time)
+            # Format the time
             start_date_string = datetime.strftime(start_time, '%Y-%m-%d')
+            # Create datetime object from formatted time
             start_date = datetime.strptime(start_date_string, '%Y-%m-%d')
             entry = DailyUsage(date=start_date, on_time=elapsed)
             db.session.add(entry)
