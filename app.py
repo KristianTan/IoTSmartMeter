@@ -27,7 +27,7 @@ class DailyUsage(db.Model):
 
     def __init__(self, date, on_time_seconds):
         self.date = date
-        self.on_time = on_time_seconds
+        self.on_time_seconds = on_time_seconds
 
     def __repr__(self):
         return '<DailyUsage %r, %r, %r>' % (self.id, self.date, self.on_time_seconds)
