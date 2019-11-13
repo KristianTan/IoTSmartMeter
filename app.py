@@ -136,7 +136,7 @@ def create_entry(change_pin):
     pins[change_pin]['on_date'] = None
 
 
-@app.route('/handle_data/update_kWh', methods=['POST'])
+@app.route('/handle_data', methods=['POST'])
 def handle_data():
     new_price = request.form['kWhprice']
     os.environ['cost_per_kWh'] = str(new_price)
