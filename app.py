@@ -72,7 +72,13 @@ def toggle_pin(change_pin):
     if GPIO.input(change_pin) == 0:
         message += " off."
         if pins[change_pin]['on_time'] is not None:
+            latest_entry = db.session.query(DailyUsage).order_by(DailyUsage.id.desc()).first()
+            print("========= LATEST")
+            print(latest_entry)
+            print("=========")
+
             start_time = pins[change_pin]['on_time']
+            # Get the elapsed time and strip away milliseconds
             elapsed = str(datetime.now() - start_time).split(".")[0]
 
             # Format the time
