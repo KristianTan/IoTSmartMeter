@@ -1,9 +1,8 @@
 from flask import Flask, render_template
 import RPi.GPIO as GPIO
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import create_engine
 import os
-
+import datetime
 # from daily_usage import DailyUsage
 
 app = Flask(__name__)
@@ -22,7 +21,7 @@ db = SQLAlchemy(app)
 class DailyUsage(db.Model):
     __tablename__ = 'daily_usage'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    date = db.Column(db.String(80), unique=True, nullable=False)
+    date = db.Column(db.DateTime, unique=True, nullable=False)
     hours = db.Column(db.Integer, unique=False)
 
     def __init__(self, date, hours):
@@ -34,14 +33,12 @@ class DailyUsage(db.Model):
 
 
 db.create_all()
-test = DailyUsage(date="12/11/2019", hours=5)
-db.session.add(test)
-db.session.commit()
-print(DailyUsage.query.all())
+
+DailyUsage.query.filter_by(id=1).delete()
 
 # Create dictionary to store pin info
 pins = {
-    25: {'name': 'Light', 'state': GPIO.LOW}
+    25: {'name': 'Light', 'state': GPIO.LOW, 'on_time': None}
 }
 
 # Setup each pin
@@ -81,6 +78,8 @@ def toggle_pin(change_pin):
         message += " off."
     else:
         message += " on."
+        pins[change_pin]['on_time'] = datetime.datetime.now()
+        print(pins[change_pin])
 
     for pin in pins:
         pins[pin]['state'] = GPIO.input(pin)
