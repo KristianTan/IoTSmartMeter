@@ -77,13 +77,10 @@ def toggle_pin(change_pin):
     # Toggle the selected pin
     GPIO.output(change_pin, not GPIO.input(change_pin))
 
-    message = "Turned " + device_name
     if GPIO.input(change_pin) == 0:
-        message += " off."
         if pins[change_pin]['on_time'] is not None:
             create_entry(change_pin)
     else:
-        message += " on."
         pins[change_pin]['on_time'] = datetime.now()
         pins[change_pin]['on_date'] = date.today()
 
@@ -98,11 +95,12 @@ def toggle_pin(change_pin):
     else:
         daily_total = 0
 
+    todays_cost = 0.1622 * daily_total
 
     template_data = {
-        'message': message,
         'pins': pins,
-        'daily_total': daily_total
+        'daily_total': daily_total,
+        'todays_cost': todays_cost
     }
 
     return render_template('main.html', **template_data)

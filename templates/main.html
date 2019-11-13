@@ -24,9 +24,6 @@
            {% endfor %}
 
 
-{#           {% if message %}#}
-{#           <h2>{{ message }}</h2>#}
-{#           {% endif %}#}
         </div>
 
         <div class="smart_meter">
@@ -40,6 +37,7 @@
                 </p>
 {#            Implement some way to display "No devices" message if none are in use#}
                 <p> Total energy used today: {{ daily_total }} kWh.</p>
+                <p> Total cost of today's energy usage: £{{ todays_cost }}</p>
             </div>
         </div>
     </div>
