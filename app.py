@@ -45,7 +45,7 @@ if latest_entry and latest_entry.date == datetime.today():
 
 # Create dictionary to store pin info
 pins = {
-    25: {'name': 'Light', 'state': GPIO.LOW, 'on_time': None}
+    25: {'name': 'Light', 'state': GPIO.LOW, 'on_time': None, 'on_date': None}
 }
 
 # Setup each pin
@@ -87,10 +87,7 @@ def toggle_pin(change_pin):
             # Get the elapsed time and strip away milliseconds
             elapsed = int((datetime.now() - start_time).total_seconds())
 
-            # Format the time
-            start_date_string = datetime.strftime(start_time, '%Y-%m-%d')
-            # Create datetime object from formatted time
-            start_date = datetime.strptime(start_date_string, '%Y-%m-%d')
+            start_date = pins[change_pin]['on_date']
 
             # If there is already an entry for today, update on time
             if latest_entry and latest_entry.date == start_date:
@@ -102,9 +99,12 @@ def toggle_pin(change_pin):
 
             db.session.commit()
             pins[change_pin]['on_time'] = None
+            pins[change_pin]['on_date'] = None
+
     else:
         message += " on."
         pins[change_pin]['on_time'] = datetime.now()
+        pins[change_pin]['on_date'] = datetime.today()
 
     for pin in pins:
         pins[pin]['state'] = GPIO.input(pin)
