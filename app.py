@@ -76,7 +76,7 @@ def toggle_pin(change_pin):
 
             start_time = pins[change_pin]['on_time']
             # Get the elapsed time and strip away milliseconds
-            elapsed = (datetime.now() - start_time).total_seconds()
+            elapsed = int((datetime.now() - start_time).total_seconds())
             print("SECS")
             print(elapsed)
 
