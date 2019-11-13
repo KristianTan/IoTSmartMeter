@@ -41,8 +41,7 @@ latest_entry = db.session.query(DailyUsage).order_by(DailyUsage.id.desc()).first
 if latest_entry:
     latest_entry_date = date(latest_entry.date.year, latest_entry.date.month, latest_entry.date.day)
     if latest_entry_date == datetime.today().date():
-        daily_total += latest_entry.on_time_seconds
-
+        daily_total = round(latest_entry.on_time_seconds / 60, 2)
 
 # Create dictionary to store pin info
 pins = {
@@ -113,7 +112,7 @@ def toggle_pin(change_pin):
     if latest_entry:
         latest_entry_date = date(latest_entry.date.year, latest_entry.date.month, latest_entry.date.day)
         if latest_entry_date == datetime.today().date():
-            daily_total = latest_entry.on_time_seconds
+            daily_total = round(latest_entry.on_time_seconds / 60, 2)
     else:
         daily_total = 0
 
