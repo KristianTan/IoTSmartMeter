@@ -34,8 +34,6 @@ class DailyUsage(db.Model):
 
 db.create_all()
 
-DailyUsage.query.filter_by(id=1).delete()
-
 # Create dictionary to store pin info
 pins = {
     25: {'name': 'Light', 'state': GPIO.LOW, 'on_time': None}
