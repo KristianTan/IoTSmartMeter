@@ -74,7 +74,8 @@ def create_entry(change_pin):
 
 
 db.create_all()
-
+db.session.add(DailyUsage(date=date(2019, 11, 12), kwhUsed=8))
+db.session.commit()
 daily_total = get_todays_usage()
 todays_cost = get_todays_cost()
 
