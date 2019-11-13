@@ -30,7 +30,7 @@ class DailyUsage(db.Model):
         self.on_time = on_time
 
     def __repr__(self):
-        return '<DailyUsage %r, %r, %r>' % self.id, self.date, self.on_time
+        return '<DailyUsage %r, %r, %r>' % (self.id, self.date, self.on_time)
 
 
 db.create_all()
