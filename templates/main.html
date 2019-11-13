@@ -28,13 +28,14 @@
 
         <div class="smart_meter">
             <div class="smart_meter_info">
-                <p> Devices currently in use:
+                <p> Devices currently in use: </p>
+                <ul>
                     {% for pin in pins %}
                     {% if pins[pin].state == true %}
-                    {{ pins[pin].name }}
+                    <li>{{ pins[pin].name }}</li>
                     {% endif %}
                     {% endfor %}
-                </p>
+                </ul>
 {#            Implement some way to display "No devices" message if none are in use#}
 
                 <p> Total energy used today: {{ daily_total }} kWh.</p>
