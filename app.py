@@ -183,7 +183,7 @@ def handle_new_device():
     return render_template('main.html', **template_data)
 
 
-@app.route('/delete/<delete_pin')
+@app.route('/delete/<delete_pin>')
 def delete_pin(delete_pin):
     for key in pins:
         if key == delete_pin:
