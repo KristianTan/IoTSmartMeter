@@ -95,7 +95,8 @@ def toggle_pin(change_pin):
     else:
         daily_total = 0
 
-    todays_cost = float(0.1622) * daily_total
+    print(type(daily_total))
+    # todays_cost = 0.1622 * daily_total
 
     template_data = {
         'pins': pins,
@@ -112,6 +113,8 @@ def create_entry(change_pin):
     # Get the elapsed time and strip away milliseconds
     elapsed = int((datetime.now() - start_time).total_seconds())
     start_date = pins[change_pin]['on_date']
+
+    # Formula to calculate kWh based on time and wattage
     kwh = pins[change_pin]['Wattage'] * (elapsed / 3600) / 1000
 
     # If there is already an entry for today, update on time
