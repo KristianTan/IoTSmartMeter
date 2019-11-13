@@ -16,7 +16,6 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
 db = SQLAlchemy(app)
-db.create_all()
 
 
 # TODO: Move this into daily_usage class file
@@ -34,6 +33,7 @@ class DailyUsage(db.Model):
         return '<DailyUsage %r>' % self.id
 
 
+db.create_all()
 test = DailyUsage(date="12/11/2019", hours=5)
 db.session.add(test)
 db.session.commit()
