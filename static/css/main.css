@@ -1,11 +1,12 @@
 body {
     font-family: "Roboto Thin";
-    background-color: rgb(31, 31, 31);
+    background-color: black;
 }
 
 .heading {
     text-decoration: underline;
     text-align: center;
+    color: white;
     margin-bottom: 5%;
     /*background-color: aqua;*/
 }
@@ -22,6 +23,7 @@ body {
 }
 
 .device_list_title {
+    color: white;
     text-decoration: underline;
 }
 
