@@ -24,6 +24,7 @@ body {
     margin-left: 5%;
     text-align: left;
     border-bottom-style: solid;
+    border-bottom-color: black;
     border-bottom-width: 1px;
 }
 
@@ -33,16 +34,16 @@ body {
 
 .smart_meter {
     width: 65%;
-    margin-right: 2%;
+    margin-right: 5%;
     margin-left: 5%;
-    margin-bottom: 2%;
+    margin-bottom: 5%;
     border-style: solid;
     border-color: black;
     border-width: 1px;
 }
 
 .smart_meter_info {
-    margin-top: 5%;
+    margin-top: 2%;
     margin-left: 5%;
     margin-bottom: 5%;
 }
