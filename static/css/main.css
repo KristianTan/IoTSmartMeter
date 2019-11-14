@@ -19,6 +19,10 @@ body {
     /*height: 90%;*/
 }
 
+.device_list_title {
+    text-decoration: underline;
+}
+
 .device_list {
     width: 25%;
     margin-left: 5%;
@@ -26,8 +30,8 @@ body {
     border-bottom: 1px solid black;
 }
 
-.device_list_title {
-    text-decoration: underline;
+.add_device {
+    text-align: center;
 }
 
 .smart_meter {
