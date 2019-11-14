@@ -65,6 +65,7 @@ def create_entry(change_pin):
         if latest_entry_date == start_date:
             print("LATEST ENTRY DATE: ")
             print(latest_entry_date)
+            print(kwh)
             latest_entry.kwhUsed += kwh
         else:
             print("NEW")
