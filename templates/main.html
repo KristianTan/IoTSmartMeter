@@ -16,7 +16,7 @@
         {% for pin in pins %}
             {% if pins[pin].name != None %}
                 <p>
-                    {{ pins[pin].name }} :
+                    {{ pins[pin].name }} ({{ pin[pins].wattage }})W :
                     {% if pins[pin].state == true %}
                         (<a href="/toggle/{{ pin }}">turn off</a>)
                         (<a href="/remove/{{ pin }}">remove</a>)
@@ -25,14 +25,6 @@
                         (<a href="/remove/{{ pin }}">remove</a>)
                         </p>
                     {% endif %}
-                <ul class="device_details">
-                    {% if pins[pin].on_time %}
-                        <li>
-                            Last turned on at: {{ pins[pin].on_time }}
-                        </li>
-                    {% endif %}
-                    <li>Device Wattage: {{ pins[pin].wattage }} </li>
-                </ul>
             {% endif %}
         {% endfor %}
         <br>
