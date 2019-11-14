@@ -58,20 +58,12 @@ def create_entry(change_pin):
 
     # Formula to calculate kWh based on time and wattage
     kwh = pins[change_pin]['wattage'] * (elapsed / 3600) / 1000
-    print(pins[change_pin]['wattage'])
-    print(elapsed)
-    print(kwh)
-    print("LATEST ENTRY: ")
-    print(latest_entry)
     # If there is already an entry for today, update on time
     if latest_entry:
         latest_entry_date = date(latest_entry.date.year, latest_entry.date.month, latest_entry.date.day)
         if latest_entry_date == start_date:
-            print("LATEST ENTRY DATE: ")
-            print(latest_entry_date)
             latest_entry.kwhUsed += kwh
         else:
-            print("NEW")
             # If no entry for today, make one
             entry = DailyUsage(date=start_date, kwhUsed=kwh)
             db.session.add(entry)
@@ -181,6 +173,7 @@ def toggle_pin(change_pin):
 def handle_change_kWh():
     new_price = request.form['kWhprice']
     os.environ['cost_per_kWh'] = str(new_price)
+    todays_cost = get_todays_cost()
     template_data = {
         'pins': pins,
         'daily_total': daily_total,
