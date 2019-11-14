@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import asc, desc
 import os
 from datetime import datetime, date, timedelta
+
 # from daily_usage import DailyUsage
 
 app = Flask(__name__)
@@ -56,8 +57,8 @@ def create_entry(change_pin):
     start_date = pins[change_pin]['on_date']
 
     # Formula to calculate kWh based on time and wattage
-    kwh = pins[change_pin]['Wattage'] * (elapsed / 3600) / 1000
-    print(pins[change_pin]['Wattage'])
+    kwh = pins[change_pin]['wattage'] * (elapsed / 3600) / 1000
+    print(pins[change_pin]['wattage'])
     print(elapsed)
     print(kwh)
     print("LATEST ENTRY: ")
@@ -109,18 +110,16 @@ todays_cost = get_todays_cost()
 
 # Create dictionary to store pin info
 pins = {
-    25: {'name': 'Light', 'state': GPIO.LOW, 'on_time': None, 'on_date': None, 'Wattage': 15},
-    8: {'name': None, 'state': GPIO.LOW, 'on_time': None, 'on_date': None, 'Wattage': 0},
-    7: {'name': None, 'state': GPIO.LOW, 'on_time': None, 'on_date': None, 'Wattage': 0},
-    12: {'name': None, 'state': GPIO.LOW, 'on_time': None, 'on_date': None, 'Wattage': 0}
+    25: {'name': 'Light', 'state': GPIO.LOW, 'on_time': None, 'on_date': None, 'wattage': 15},
+    8: {'name': None, 'state': GPIO.LOW, 'on_time': None, 'on_date': None, 'wattage': 0},
+    7: {'name': None, 'state': GPIO.LOW, 'on_time': None, 'on_date': None, 'wattage': 0},
+    12: {'name': None, 'state': GPIO.LOW, 'on_time': None, 'on_date': None, 'wattage': 0}
 }
-
 
 # Setup each pin
 for pin in pins:
     GPIO.setup(pin, GPIO.OUT)
     GPIO.output(pin, GPIO.LOW)
-
 
 labels, values, max = generate_graph_data()
 
@@ -217,7 +216,7 @@ def handle_new_device():
     for key in pins:
         if pins[key]['name'] is None:
             pins[key]['name'] = new_name
-            pins[key]['Wattage'] = new_wattage
+            pins[key]['wattage'] = new_wattage
             break
 
     template_data = {
@@ -238,7 +237,7 @@ def delete_pin(delete_pin):
     for key in pins:
         if key == delete_pin:
             pins[delete_pin]['name'] = None
-            pins[delete_pin]['Wattage'] = None
+            pins[delete_pin]['wattage'] = None
             break
 
     template_data = {
