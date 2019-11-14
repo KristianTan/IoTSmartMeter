@@ -28,6 +28,7 @@ body {
 }
 
 .device_list {
+    color: rgb(192, 192, 192);
     width: 25%;
     /*background-color: red;*/
     margin-left: 5%;
@@ -36,10 +37,12 @@ body {
 }
 
 .device_details {
+    color: rgb(192, 192, 192);
     list-style-type: none;
 }
 
 .smart_meter {
+    color: rgb(192, 192, 192);
     width: 65%;
     margin-right: 5%;
     margin-left: 5%;
@@ -56,6 +59,7 @@ body {
 }
 
 .chart {
+    color: rgb(192, 192, 192);
     width: 70%;
     height: 50%;
     margin-left: 15%;
@@ -64,6 +68,7 @@ body {
 }
 
 .chart_title {
+    color: white;
     text-decoration: underline;
     text-align: center;
 }
