@@ -95,7 +95,7 @@ def generate_graph_data():
         count += 1
         if count >= 5:
             break
-    return labels, values, max
+    return labels.reverse(), values.reverse(), max
 
 db.create_all()
 
