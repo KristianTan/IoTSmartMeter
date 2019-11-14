@@ -16,13 +16,11 @@ body {
 .containerRows {
     display: flex;
     flex-direction: row;
-    /*background-color: darkkhaki;*/
     /*height: 90%;*/
 }
 
 .device_list {
     width: 25%;
-    /*background-color: red;*/
     margin-left: 5%;
     text-align: left;
     border-bottom-style: solid;
@@ -35,10 +33,9 @@ body {
 
 .smart_meter {
     width: 65%;
-    margin-right: 5%;
+    margin-right: 2%;
     margin-left: 5%;
     margin-bottom: 2%;
-    /*background-color: coral;*/
     border-style: solid;
     border-color: black;
     border-width: 1px;
