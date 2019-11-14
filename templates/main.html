@@ -66,7 +66,7 @@
                 </ul>
 
 {#            <div class="chart">#}
-                <h3 class="chart_title">Last weeks usage</h3>
+                <h3 class="chart_title">Energy usage for the last 7 days</h3>
                 <canvas id="chart" class="chart" ></canvas>
                 <script>
                   // bar chart data
@@ -90,7 +90,7 @@
                   }
                  // get bar chart canvas
                  var mychart = document.getElementById("chart").getContext("2d");
-                   steps = 1
+                   steps = 1;
                    max = {{ max }}
                  // draw bar chart
                  new Chart(mychart).Bar(barData, {
