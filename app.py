@@ -57,6 +57,9 @@ def create_entry(change_pin):
 
     # Formula to calculate kWh based on time and wattage
     kwh = pins[change_pin]['Wattage'] * (elapsed / 3600) / 1000
+    print(pins[change_pin]['Wattage'])
+    print(elapsed)
+    print(kwh)
     print("LATEST ENTRY: ")
     print(latest_entry)
     # If there is already an entry for today, update on time
