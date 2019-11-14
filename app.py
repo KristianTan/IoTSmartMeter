@@ -85,17 +85,22 @@ def generate_graph_data():
     max = 0
 
     # Create data for chart
-    count = 0
-    records = DailyUsage.query.order_by(desc(DailyUsage.date)).all()
+    # count = 0
+    records = DailyUsage.query.order_by(desc(DailyUsage.date)).limit(5).all()
+    print(records)
     for record in records:
         labels.append(date(record.date.year, record.date.month, record.date.day))
         values.append(record.kwhUsed)
         if record.kwhUsed > max:
             max = record.kwhUsed
-        count += 1
-        if count >= 5:
-            break
+        # count += 1
+        # if count >= 5:
+        #     break
+
+    labels.reverse()
+    values.reverse()
     return labels, values, max
+
 
 db.create_all()
 
@@ -118,6 +123,7 @@ for pin in pins:
 
 
 labels, values, max = generate_graph_data()
+
 
 @app.route("/")
 def main():
@@ -245,6 +251,7 @@ def delete_pin(delete_pin):
         'max': max
     }
     return render_template('main.html', **template_data)
+
 
 @app.route("/update_info/kWh")
 def change_kWh():
