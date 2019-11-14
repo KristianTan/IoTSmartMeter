@@ -10,16 +10,7 @@ body {
 }
 
 .inputs {
-    display: flex;
-    flex-direction: column;
-    margin-right: 5%;
-    margin-left: 5%;
-    margin-bottom: 2%;
-    border-top-style: solid;
-    border-top-width: 1px;
-    border-top: black;
-    /*background-color: green;*/
-    /*height: 10%;*/
+    margin-top: 10%;
 }
 
 .containerRows {
