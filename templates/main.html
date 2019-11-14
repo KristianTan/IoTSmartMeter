@@ -1,114 +1,114 @@
 <!DOCTYPE html>
 <head>
-   <title>Current Status</title>
+    <title>Current Status</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
 </head>
 
 <div class="heading">
-    <h1 >IoT Smart Meter and Lighting Control</h1>
+    <h1>IoT Smart Meter and Lighting Control</h1>
 </div>
 
 <body>
-    <div class="containerRows">
-        <div class="device_list">
-           <h3 class="device_list_title">Device Listing and Status</h3>
+<div class="containerRows">
+    <div class="device_list">
+        <h3 class="device_list_title">Device Listing and Status</h3>
 
-            {% for pin in pins %}
-                {% if pins[pin].name != None %}
-                    <p>
-                        {{ pins[pin].name }} :
+        {% for pin in pins %}
+            {% if pins[pin].name != None %}
+                <p>
+                    {{ pins[pin].name }} :
                     {% if pins[pin].state == true %}
-                        (<a href="/toggle/{{pin}}">turn off</a>)
-                        (<a href="/remove/{{pin}}">remove</a>)
+                        (<a href="/toggle/{{ pin }}">turn off</a>)
+                        (<a href="/remove/{{ pin }}">remove</a>)
                     {% else %}
-                        (<a href="/toggle/{{pin}}">turn on</a>)
-                    (<a href="/remove/{{pin}}">remove</a>)
-                    </p>
+                        (<a href="/toggle/{{ pin }}">turn on</a>)
+                        (<a href="/remove/{{ pin }}">remove</a>)
+                        </p>
                     {% endif %}
-                {% endif %}
-            {% endfor %}
-            <p><a href="/devices/add_device">Add device</a></p>
+            {% endif %}
+        {% endfor %}
+    </div>
 
-         {% if display_change_kWh == True %}
-            <form action="{{ url_for('handle_change_kWh') }}" method="post">
-                Change cost per kWh: <input type="text" name="kWhprice" required>
+    <p><a href="/devices/add_device">Add device</a></p>
+
+    {% if display_change_kWh == True %}
+        <form action="{{ url_for('handle_change_kWh') }}" method="post">
+            Change cost per kWh: <input type="text" name="kWhprice" required>
+            <input type="submit">
+        </form>
+    {% endif %}
+
+    {% if display_new_device_form == True %}
+        <div class=".add_new_device_form">
+            <form action="{{ url_for('handle_new_device') }}" method="post">
+                New device name: <input type="text" name="new_device_name" required> <br>
+                New device wattage: <input type="number" name="new_device_wattage" required> <br>
                 <input type="submit">
             </form>
-        {% endif %}
-
-        {% if display_new_device_form == True %}
-            <div class=".add_new_device_form">
-                    <form action="{{ url_for('handle_new_device') }}" method="post">
-                        New device name: <input type="text" name="new_device_name" required> <br>
-                        New device wattage: <input type="number" name="new_device_wattage" required> <br>
-                        <input type="submit">
-                    </form>
-            </div>
-        {% endif %}
-
         </div>
+    {% endif %}
 
-        <div class="smart_meter">
-            <div class="smart_meter_info">
-{#            Implement some way to display "No devices" message if none are in use#}
-                <p> Cost per kWh: £{{ cost_per_kWh }} <a href="/update_info/kWh"> (Update)</a></p>
-                <p> Total energy used today: {{ daily_total }} kWh.</p>
-                <p> Total cost of today's energy usage: £{{ todays_cost }}</p>
+    <div class="smart_meter">
+        <div class="smart_meter_info">
+            {#            Implement some way to display "No devices" message if none are in use#}
+            <p> Cost per kWh: £{{ cost_per_kWh }} <a href="/update_info/kWh"> (Update)</a></p>
+            <p> Total energy used today: {{ daily_total }} kWh.</p>
+            <p> Total cost of today's energy usage: £{{ todays_cost }}</p>
 
-                <p> Devices currently in use: </p>
-                <ul>
-                    {% for pin in pins %}
+            <p> Devices currently in use: </p>
+            <ul>
+                {% for pin in pins %}
                     {% if pins[pin].state == true %}
-                    <li>{{ pins[pin].name }}</li>
+                        <li>{{ pins[pin].name }}</li>
                     {% endif %}
-                    {% endfor %}
-                </ul>
+                {% endfor %}
+            </ul>
 
-{#            <div class="chart">#}
-                <h3 class="chart_title">Last weeks usage</h3>
-                <canvas id="chart" class="chart" ></canvas>
-                <script>
-                  // bar chart data
-                  var barData = {
-                    labels : [
-                      {% for item in labels %}
-                       "{{ item }}",
-                      {% endfor %}
-                ],
-                    datasets : [{
-                      fillColor: "rgba(151,187,205,0.2)",
-                      strokeColor: "rgba(151,187,205,1)",
-                      pointColor: "rgba(151,187,205,1)",
-                      data : [
-                        {% for item in values %}
-                           "{{ item }}",
-                          {% endfor %}
+            {#            <div class="chart">#}
+            <h3 class="chart_title">Last weeks usage</h3>
+            <canvas id="chart" class="chart"></canvas>
+            <script>
+                // bar chart data
+                var barData = {
+                    labels: [
+                        {% for item in labels %}
+                            "{{ item }}",
+                        {% endfor %}
+                    ],
+                    datasets: [{
+                        fillColor: "rgba(151,187,205,0.2)",
+                        strokeColor: "rgba(151,187,205,1)",
+                        pointColor: "rgba(151,187,205,1)",
+                        data: [
+                            {% for item in values %}
+                                "{{ item }}",
+                            {% endfor %}
+                        ]
+                    }
                     ]
-                      }
-                    ]
-                  }
-                 // get bar chart canvas
-                 var mychart = document.getElementById("chart").getContext("2d");
-                   steps = 1
-                   max = {{ max }}
-                 // draw bar chart
-                 new Chart(mychart).Bar(barData, {
-                   scaleOverride: true,
-                   scaleSteps: steps,
-                   scaleStepWidth: Math.ceil(max / steps),
-                   scaleStartValue: 0,
-                   scaleShowVerticalLines: true,
-                   scaleShowGridLines : true,
-                   barShowStroke : true,
-                   scaleShowLabels: true
-                   }
-                 );
-                </script>
+                }
+                // get bar chart canvas
+                var mychart = document.getElementById("chart").getContext("2d");
+                steps = 1
+                max = {{ max }}
+                    // draw bar chart
+                    new Chart(mychart).Bar(barData, {
+                            scaleOverride: true,
+                            scaleSteps: steps,
+                            scaleStepWidth: Math.ceil(max / steps),
+                            scaleStartValue: 0,
+                            scaleShowVerticalLines: true,
+                            scaleShowGridLines: true,
+                            barShowStroke: true,
+                            scaleShowLabels: true
+                        }
+                    );
+            </script>
 
-{#            </div>#}
-            </div>
+            {#            </div>#}
         </div>
     </div>
+</div>
 </body>
 </html>
