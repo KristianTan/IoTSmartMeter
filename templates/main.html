@@ -38,13 +38,11 @@
         {% endif %}
 
         {% if display_new_device_form == True %}
-            <div class="add_new_device_form">
                     <form action="{{ url_for('handle_new_device') }}" method="post">
                         <label>New device name:</label> <input type="text" name="new_device_name" required> <br>
                         <label>New device wattage:</label> <input type="number" name="new_device_wattage" required> <br>
                         <input type="submit">
                     </form>
-            </div>
         {% endif %}
 
         </div>
