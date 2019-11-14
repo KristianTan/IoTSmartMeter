@@ -24,11 +24,12 @@ body {
 
 .device_list_title {
     color: white;
+    font-size: 18px;
     text-decoration: underline;
 }
 
 .device_list {
-    font-size: 18px;
+    font-size: 16px;
     color: rgb(192, 192, 192);
     width: 25%;
     /*background-color: red;*/
