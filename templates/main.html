@@ -26,9 +26,9 @@
                         </p>
                         <p>
                         <ul class="device_details">
-                            {% if pins[pin].one_date != None or  pins[pin].on_time %}
+                            {% if pins[pin].on_date != None or  pins[pin].on_time %}
                                 <li>
-                                    {% if  pins[pin].one_date != None %}
+                                    {% if  pins[pin].on_date != None %}
                                         {{ pins[pin].on_date }}
                                     {% endif %}
                                     {% if pins[pin].on_time != None %}
