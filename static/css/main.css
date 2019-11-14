@@ -10,7 +10,9 @@ body {
 }
 
 .inputs {
-    margin-top: 10%;
+    margin-top: 15%;
+    margin-left: 5%;
+    border-left: 1px solid black;
 }
 
 .containerRows {
