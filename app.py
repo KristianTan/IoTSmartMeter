@@ -52,20 +52,20 @@ def get_todays_cost():
 def create_entry(change_pin):
     latest_entry = DailyUsage.query.order_by(desc(DailyUsage.date)).first()
     start_time = pins[change_pin]['on_time']
-    # Get the elapsed time and strip away milliseconds
     elapsed = int((datetime.now() - start_time).total_seconds())
     start_date = pins[change_pin]['on_date']
 
     # Formula to calculate kWh based on time and wattage
     kwh = pins[change_pin]['Wattage'] * (elapsed / 3600) / 1000
-
+    print("LATEST ENTRY: " + latest_entry)
     # If there is already an entry for today, update on time
-    # if latest_entry:
     if latest_entry:
         latest_entry_date = date(latest_entry.date.year, latest_entry.date.month, latest_entry.date.day)
         if latest_entry_date == start_date:
+            print("LATEST ENTRY DATE: " + latest_entry_date)
             latest_entry.kwhUsed += kwh
     else:
+        print("NEW")
         # If no entry for today, make one
         entry = DailyUsage(date=start_date, kwhUsed=kwh)
         db.session.add(entry)
