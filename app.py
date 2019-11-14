@@ -93,7 +93,7 @@ def generate_graph_data():
         if record.kwhUsed > max:
             max = record.kwhUsed
         count += 1
-        if count >= 7:
+        if count >= 5:
             break
     return labels, values, max
 
