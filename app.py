@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import asc, desc
 import os
 from datetime import datetime, date, timedelta
+
 # from daily_usage import DailyUsage
 
 app = Flask(__name__)
@@ -57,20 +58,12 @@ def create_entry(change_pin):
 
     # Formula to calculate kWh based on time and wattage
     kwh = pins[change_pin]['Wattage'] * (elapsed / 3600) / 1000
-    print(pins[change_pin]['Wattage'])
-    print(elapsed)
-    print(kwh)
-    print("LATEST ENTRY: ")
-    print(latest_entry)
     # If there is already an entry for today, update on time
     if latest_entry:
         latest_entry_date = date(latest_entry.date.year, latest_entry.date.month, latest_entry.date.day)
         if latest_entry_date == start_date:
-            print("LATEST ENTRY DATE: ")
-            print(latest_entry_date)
             latest_entry.kwhUsed += kwh
         else:
-            print("NEW")
             # If no entry for today, make one
             entry = DailyUsage(date=start_date, kwhUsed=kwh)
             db.session.add(entry)
@@ -87,7 +80,7 @@ def generate_graph_data():
     # Create data for chart
     # count = 0
     records = DailyUsage.query.order_by(desc(DailyUsage.date)).limit(7).all()
-    print(records)
+    (records)
     for record in records:
         labels.append(date(record.date.year, record.date.month, record.date.day))
         values.append(record.kwhUsed)
@@ -115,12 +108,10 @@ pins = {
     12: {'name': None, 'state': GPIO.LOW, 'on_time': None, 'on_date': None, 'Wattage': 0}
 }
 
-
 # Setup each pin
 for pin in pins:
     GPIO.setup(pin, GPIO.OUT)
     GPIO.output(pin, GPIO.LOW)
-
 
 labels, values, max = generate_graph_data()
 

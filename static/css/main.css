@@ -9,20 +9,14 @@ body {
     /*background-color: aqua;*/
 }
 
-.inputs {
-    margin-top: 10%;
-}
-
 .containerRows {
     display: flex;
     flex-direction: row;
-    /*background-color: darkkhaki;*/
     /*height: 90%;*/
 }
 
 .device_list {
     width: 25%;
-    /*background-color: red;*/
     margin-left: 5%;
     text-align: left;
 }
@@ -31,18 +25,22 @@ body {
     text-decoration: underline;
 }
 
+.add_device {
+    margin-left: 15%;
+}
+
 .smart_meter {
     width: 65%;
     margin-right: 5%;
     margin-left: 5%;
-    margin-bottom: 2%;
-    /*background-color: coral;*/
+    margin-bottom: 5%;
     border-style: solid;
     border-color: black;
     border-width: 1px;
 }
 
 .smart_meter_info {
+    margin-top: 2%;
     margin-left: 5%;
     margin-bottom: 5%;
 }
