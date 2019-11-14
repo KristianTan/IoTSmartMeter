@@ -25,6 +25,10 @@ body {
     text-decoration: underline;
 }
 
+.add_device {
+    text-align: center;
+}
+
 .smart_meter {
     width: 65%;
     margin-right: 5%;
