@@ -60,14 +60,3 @@ body {
     text-decoration: underline;
     text-align: center;
 }
-
-label{
-    display: inline-block;
-    float: left;
-    clear: left;
-    text-align: left;
-}
-input {
-  display: inline-block;
-  float: left;
-}
