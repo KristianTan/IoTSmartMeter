@@ -86,7 +86,7 @@ def generate_graph_data():
 
     # Create data for chart
     count = 0
-    records = DailyUsage.query.order_by(asc(DailyUsage.date)).all()
+    records = DailyUsage.query.order_by(desc(DailyUsage.date)).all()
     for record in records:
         labels.append(date(record.date.year, record.date.month, record.date.day))
         values.append(record.kwhUsed)
@@ -95,7 +95,7 @@ def generate_graph_data():
         count += 1
         if count >= 5:
             break
-    return labels, values, max
+    return labels.reverse(), values.reverse(), max
 
 db.create_all()
 
