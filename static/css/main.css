@@ -10,9 +10,6 @@ body {
 }
 
 .inputs {
-    display: flex;
-    width: 10%;
-    border-left: 1px solid black;
     margin-top: 10%;
 }
 
@@ -22,20 +19,14 @@ body {
     /*height: 90%;*/
 }
 
-.device_list_title {
-    text-decoration: underline;
-}
-
 .device_list {
-    display: flex;
-    height: 50%;
-    width: 15%;
+    width: 25%;
     margin-left: 5%;
     text-align: left;
 }
 
-.add_device {
-    margin-left: 15%;
+.device_list_title {
+    text-decoration: underline;
 }
 
 .smart_meter {
