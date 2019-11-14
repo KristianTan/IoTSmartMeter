@@ -23,9 +23,7 @@ body {
     width: 25%;
     margin-left: 5%;
     text-align: left;
-    border-bottom-style: solid;
-    border-bottom-color: black;
-    border-bottom-width: 1px;
+    border-bottom: 1px solid black;
 }
 
 .device_list_title {
