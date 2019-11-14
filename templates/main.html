@@ -25,23 +25,22 @@
                         (<a href="/remove/{{ pin }}">remove</a>)
                         </p>
                     {% endif %}
-                <p>
                 <ul class="device_details">
                     {% if pins[pin].on_date != None or  pins[pin].on_time %}
                         <li>
                             {% if  pins[pin].on_date != None %}
-                                {{ pins[pin].on_date }}
+                                Last turned on at: {{ pins[pin].on_date }}
                             {% endif %}
                             {% if pins[pin].on_time != None %}
-                                {{ pins[pin].on_time }}
+                                , {{ pins[pin].on_time }}
                             {% endif %}
                         </li>
                     {% endif %}
                     <li>Device Wattage: {{ pins[pin].wattage }} </li>
                 </ul>
-                </p>
             {% endif %}
         {% endfor %}
+        <br>
         <p><a href="/devices/add_device">Add device</a></p>
 
         {% if display_change_kWh == True %}
