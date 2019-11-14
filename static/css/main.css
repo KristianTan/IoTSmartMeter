@@ -25,6 +25,8 @@ body {
     /*background-color: red;*/
     margin-left: 5%;
     text-align: left;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
 }
 
 .device_list_title {
@@ -43,6 +45,7 @@ body {
 }
 
 .smart_meter_info {
+    margin-top: 5%;
     margin-left: 5%;
     margin-bottom: 5%;
 }
