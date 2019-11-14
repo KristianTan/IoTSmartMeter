@@ -24,6 +24,7 @@ body {
 }
 
 .device_list {
+    height: 50%;
     width: 25%;
     margin-left: 5%;
     text-align: left;
@@ -31,7 +32,7 @@ body {
 }
 
 .add_device {
-    text-align: center;
+    margin-left: 15%;
 }
 
 .smart_meter {
