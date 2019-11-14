@@ -20,6 +20,10 @@ body {
     /*height: 90%;*/
 }
 
+.device_list_title {
+    text-decoration: underline;
+}
+
 .device_list {
     width: 25%;
     /*background-color: red;*/
@@ -28,8 +32,8 @@ body {
     margin-bottom: 5%;
 }
 
-.device_list_title {
-    text-decoration: underline;
+.device_details {
+    list-style-type: none;
 }
 
 .smart_meter {

@@ -88,7 +88,6 @@ def generate_graph_data():
     # Create data for chart
     # count = 0
     records = DailyUsage.query.order_by(desc(DailyUsage.date)).limit(7).all()
-    print(records)
     for record in records:
         labels.append(date(record.date.year, record.date.month, record.date.day))
         values.append(record.kwhUsed)
