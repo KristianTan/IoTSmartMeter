@@ -49,7 +49,7 @@ body {
     margin-bottom: 2%;
     /*background-color: coral;*/
     border-style: solid;
-    border-color: rgb(0, 0, 128);
+    border-color: white;
     border-width: 1px;
 }
 
@@ -60,7 +60,7 @@ body {
 }
 
 .chart {
-    color: rgb(0, 0, 128);
+    color: white;
     width: 70%;
     height: 50%;
     margin-left: 15%;
