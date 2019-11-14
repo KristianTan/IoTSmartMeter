@@ -49,17 +49,18 @@ body {
     margin-bottom: 2%;
     /*background-color: coral;*/
     border-style: solid;
-    border-color: black;
+    border-color: rgb(0, 0, 128);
     border-width: 1px;
 }
 
 .smart_meter_info {
+    color: rgb(192, 192, 192);
     margin-left: 5%;
     margin-bottom: 5%;
 }
 
 .chart {
-    color: rgb(192, 192, 192);
+    color: rgb(0, 0, 128);
     width: 70%;
     height: 50%;
     margin-left: 15%;
