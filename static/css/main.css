@@ -9,10 +9,6 @@ body {
     /*background-color: aqua;*/
 }
 
-.inputs {
-    margin-top: 2%;
-}
-
 .containerRows {
     display: flex;
     flex-direction: row;
