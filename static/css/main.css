@@ -10,6 +10,9 @@ body {
 }
 
 .inputs {
+    display: flex;
+    width: 10%;
+    border-left: 1px solid black;
     margin-top: 10%;
 }
 
@@ -29,12 +32,9 @@ body {
     width: 15%;
     margin-left: 5%;
     text-align: left;
-    border-right: 1px solid black;
 }
 
 .add_device {
-    display: flex;
-    width: 10%;
     margin-left: 15%;
 }
 
