@@ -17,7 +17,7 @@
             {% for pin in pins %}
                 {% if pins[pin].name != None %}
                     <p>
-                        {{ pins[pin].name }} :
+                        {{ pins[pin].name }} ({{ pins[pin].wattage }}W):
                     {% if pins[pin].state == true %}
                         (<a href="/toggle/{{pin}}">turn off</a>)
                         (<a href="/remove/{{pin}}">remove</a>)
@@ -28,7 +28,7 @@
                     {% endif %}
                 {% endif %}
             {% endfor %}
-            <p class="add_device"><a href="/devices/add_device">Add device</a></p>
+            <p><a href="/devices/add_device">Add device</a></p>
 
          {% if display_change_kWh == True %}
             <form action="{{ url_for('handle_change_kWh') }}" method="post">
@@ -38,7 +38,7 @@
         {% endif %}
 
         {% if display_new_device_form == True %}
-            <div class=".add_new_device_form">
+            <div class="add_new_device_form">
                     <form action="{{ url_for('handle_new_device') }}" method="post">
                         New device name: <input type="text" name="new_device_name" required> <br>
                         New device wattage: <input type="number" name="new_device_wattage" required> <br>
