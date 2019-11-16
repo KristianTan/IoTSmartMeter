@@ -25,10 +25,6 @@ body {
     text-decoration: underline;
 }
 
-.add_device {
-    margin-left: 15%;
-}
-
 .smart_meter {
     width: 65%;
     margin-right: 5%;
@@ -54,4 +50,8 @@ body {
 .chart_title {
     text-decoration: underline;
     text-align: center;
+}
+
+.add_new_device_form {
+    margin-top: 10%;
 }
