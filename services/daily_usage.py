@@ -9,8 +9,8 @@ class DailyUsageService:
     def test_me(msg):
         print(msg)
 
-    @staticmethod
-    def get_todays_usage():
+
+    def get_todays_usage(self):
         latest_entry = DailyUsage.query.order_by(desc(DailyUsage.date)).first()
         # latest_entry = db.session.query(DailyUsage).order_by(DailyUsage.date.asc()).first()
         if latest_entry:
