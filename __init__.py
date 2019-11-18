@@ -1,1 +1,1 @@
-from .services.daily_usage_service import DailyUsageService
+from services.daily_usage_service import DailyUsageService
