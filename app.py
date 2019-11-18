@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import asc, desc
 import os
 from datetime import datetime, date, timedelta
+from services import daily_usage_service
 # from daily_usage import DailyUsage
 
 app = Flask(__name__)
@@ -16,6 +17,8 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
 db = SQLAlchemy(app)
+os.environ['cost_per_kWh'] = '0.1622'
+
 
 # TODO: Move this into daily_usage class file
 class DailyUsage(db.Model):
@@ -31,10 +34,6 @@ class DailyUsage(db.Model):
 
     def __repr__(self):
         return '<DailyUsage %r, %r, %r>' % (self.id, self.date, self.kwhUsed)
-
-from services import daily_usage_service
-
-os.environ['cost_per_kWh'] = '0.1622'
 
 
 def get_todays_usage():
@@ -101,7 +100,7 @@ db.create_all()
 daily_total = get_todays_usage()
 todays_cost = get_todays_cost()
 print(get_todays_usage())
-print(daily_usage_service.DailyUsageService.get_todays_usage())
+# print(daily_usage_service.DailyUsageService.get_todays_usage())
 print(get_todays_cost())
 
 # Create dictionary to store pin info
