@@ -1,9 +1,10 @@
 from datetime import datetime, date
 
 from sqlalchemy import desc
+from app import DailyUsage
 
 
-class DailyUsage:
+class DailyUsageService:
 
     @staticmethod
     def test_me(msg):
