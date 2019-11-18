@@ -5,7 +5,6 @@ from app import DailyUsage
 
 
 class DailyUsageService:
-
     @staticmethod
     def test_me(msg):
         print(msg)
