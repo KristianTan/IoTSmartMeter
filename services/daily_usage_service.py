@@ -1,8 +1,9 @@
 from datetime import datetime, date
 
 from sqlalchemy import desc
-from app import DailyUsage
+from app import DailyUsage, db
 
+db.session.create_all()
 
 class DailyUsageService:
     @staticmethod
