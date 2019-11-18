@@ -60,10 +60,10 @@ def create_entry(change_pin):
     kwh = pins[change_pin]['wattage'] * (elapsed / 3600) / 1000
     # If there is already an entry for today, update on time
     print(latest_entry)
-    if latest_entry:
-        latest_entry_date = date(latest_entry.date.year, latest_entry.date.month, latest_entry.date.day)
-        if latest_entry_date == start_date:
-            latest_entry.kwhUsed += kwh
+    if latest_entry and date(latest_entry.date.year, latest_entry.date.month, latest_entry.date.day) == start_date:
+        # latest_entry_date = date(latest_entry.date.year, latest_entry.date.month, latest_entry.date.day)
+        # if latest_entry_date == start_date:
+        latest_entry.kwhUsed += kwh
     else:
         # If no entry for today, make one
         entry = DailyUsage(date=start_date, kwhUsed=kwh)
