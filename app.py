@@ -72,16 +72,6 @@ def create_entry(change_pin):
     pins[change_pin]['on_date'] = None
 
 
-db.session.add(DailyUsage(date(2019, 11, 17), 10))
-db.session.add(DailyUsage(date(2019, 11, 16), 10.2))
-db.session.add(DailyUsage(date(2019, 11, 15), 9.3))
-db.session.add(DailyUsage(date(2019, 11, 14), 12.5))
-db.session.add(DailyUsage(date(2019, 11, 13), 9.9))
-db.session.add(DailyUsage(date(2019, 11, 12), 11.2))
-db.session.add(DailyUsage(date(2019, 11, 10), 10))
-db.session.commit()
-
-
 def generate_graph_data():
     labels = []
     values = []
