@@ -4,7 +4,6 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import asc, desc
 import os
 from datetime import datetime, date, timedelta
-from services import daily_usage_service
 # from daily_usage import DailyUsage
 
 app = Flask(__name__)
@@ -33,6 +32,7 @@ class DailyUsage(db.Model):
     def __repr__(self):
         return '<DailyUsage %r, %r, %r>' % (self.id, self.date, self.kwhUsed)
 
+from services import daily_usage_service
 
 os.environ['cost_per_kWh'] = '0.1622'
 
