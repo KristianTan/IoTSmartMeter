@@ -17,8 +17,6 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
 db = SQLAlchemy(app)
-os.environ['cost_per_kWh'] = '0.1622'
-
 
 # TODO: Move this into daily_usage class file
 class DailyUsage(db.Model):
@@ -34,6 +32,9 @@ class DailyUsage(db.Model):
 
     def __repr__(self):
         return '<DailyUsage %r, %r, %r>' % (self.id, self.date, self.kwhUsed)
+
+
+os.environ['cost_per_kWh'] = '0.1622'
 
 
 def get_todays_usage():
