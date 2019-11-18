@@ -58,15 +58,12 @@ def create_entry(change_pin):
 
     # Formula to calculate kWh based on time and wattage
     kwh = pins[change_pin]['wattage'] * (elapsed / 3600) / 1000
-    print(latest_entry)
     # If there is already an entry for today, update on time
     if latest_entry:
-        print("HERE?")
         latest_entry_date = date(latest_entry.date.year, latest_entry.date.month, latest_entry.date.day)
         if latest_entry_date == start_date:
             latest_entry.kwhUsed += kwh
     else:
-        print("CREATE ENTRY")
         # If no entry for today, make one
         entry = DailyUsage(date=start_date, kwhUsed=kwh)
         db.session.add(entry)
@@ -74,6 +71,8 @@ def create_entry(change_pin):
     pins[change_pin]['on_time'] = None
     pins[change_pin]['on_date'] = None
 
+
+db.session.add(DailyUsage(date(2019, 11, 17), 8.9))
 
 def generate_graph_data():
     labels = []
@@ -143,14 +142,12 @@ def main():
 @app.route("/toggle/<change_pin>")
 def toggle_pin(change_pin):
     change_pin = int(change_pin)
-    device_name = pins[change_pin]['name']
 
     # Toggle the selected pin
     GPIO.output(change_pin, not GPIO.input(change_pin))
 
     if GPIO.input(change_pin) == 0:
         if pins[change_pin]['on_time'] is not None:
-            print("GOTO CREATE_ENTRY")
             create_entry(change_pin)
 
     else:
