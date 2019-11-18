@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import asc, desc
 import os
 from datetime import datetime, date, timedelta
-from services import daily_usage_service
+from services import daily_usage_service.daily_usage_service
 # from daily_usage import DailyUsage
 
 app = Flask(__name__)

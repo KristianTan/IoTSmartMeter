@@ -5,11 +5,11 @@ from app import DailyUsage, db
 
 db.session.create_all()
 
+
 class DailyUsageService:
     @staticmethod
     def test_me(msg):
         print(msg)
-
 
     def get_todays_usage(self):
         latest_entry = DailyUsage.query.order_by(desc(DailyUsage.date)).first()
