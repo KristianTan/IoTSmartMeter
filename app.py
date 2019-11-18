@@ -64,6 +64,7 @@ def create_entry(change_pin):
         if latest_entry_date == start_date:
             latest_entry.kwhUsed += kwh
         else:
+            print("CREATE ENTRY")
             # If no entry for today, make one
             entry = DailyUsage(date=start_date, kwhUsed=kwh)
             db.session.add(entry)
@@ -147,6 +148,7 @@ def toggle_pin(change_pin):
 
     if GPIO.input(change_pin) == 0:
         if pins[change_pin]['on_time'] is not None:
+            print("GOTO CREATE_ENTRY")
             create_entry(change_pin)
 
     else:
