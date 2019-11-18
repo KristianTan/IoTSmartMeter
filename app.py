@@ -65,11 +65,11 @@ def create_entry(change_pin):
         latest_entry_date = date(latest_entry.date.year, latest_entry.date.month, latest_entry.date.day)
         if latest_entry_date == start_date:
             latest_entry.kwhUsed += kwh
-        else:
-            print("CREATE ENTRY")
-            # If no entry for today, make one
-            entry = DailyUsage(date=start_date, kwhUsed=kwh)
-            db.session.add(entry)
+    else:
+        print("CREATE ENTRY")
+        # If no entry for today, make one
+        entry = DailyUsage(date=start_date, kwhUsed=kwh)
+        db.session.add(entry)
     db.session.commit()
     pins[change_pin]['on_time'] = None
     pins[change_pin]['on_date'] = None
