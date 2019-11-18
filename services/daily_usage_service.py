@@ -3,7 +3,7 @@ from datetime import datetime, date
 from sqlalchemy import desc
 from app import DailyUsage, db
 
-db.session.create_all()
+db.create_all()
 
 class DailyUsageService:
     @staticmethod
