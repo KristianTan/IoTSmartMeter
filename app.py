@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import asc, desc
 import os
 from datetime import datetime, date, timedelta
-from services.daily_usage_service import test
+from . import DailyUsageService
 # from daily_usage import DailyUsage
 
 app = Flask(__name__)
@@ -100,7 +100,7 @@ db.create_all()
 daily_total = get_todays_usage()
 todays_cost = get_todays_cost()
 print(get_todays_usage())
-print(test.get_todays_usage())
+print(DailyUsageService.get_todays_usage())
 print(get_todays_cost())
 
 # Create dictionary to store pin info
