@@ -100,6 +100,7 @@ db.create_all()
 daily_total = get_todays_usage()
 todays_cost = get_todays_cost()
 print(get_todays_usage())
+print(daily_usage.DailyUsage.get_todays_usage())
 print(get_todays_cost())
 
 # Create dictionary to store pin info
