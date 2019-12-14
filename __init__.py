@@ -1,1 +1,1 @@
-from .daily_usage import DailyUsage
+from daily_usage import DailyUsage
