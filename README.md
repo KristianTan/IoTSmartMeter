@@ -14,11 +14,13 @@ An installation of Python3
 An installation of Flask
 
 ### Hardware
-1 x Raspberry Pi 3B + - To act as the microcontroller for the system.
+1 x Raspberry Pi 3B +.
 
-1 x ELEGOO 4 Channel Relay Module - To connect mains devices to the Raspberry Pi.
+1 x ELEGOO 4 Channel Relay Module.
 
-1 x 7” Raspberry Pi LCD Display - To display the smart meter style interface.
+1 x 7” Raspberry Pi LCD Display,
+
+1 x Breadboard,
 
 
 ###  Pin Numbers and Wiring Diagram
