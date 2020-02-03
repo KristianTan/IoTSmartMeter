@@ -1,6 +1,8 @@
 # IoT Smart Meter and Smart Device Control System
 
-This project is for a raspberry pi to control and track the usage of connected mains devices.  The project is contained within a Flask application with can be found on the localhost at port 8090 when run.
+This project is for a raspberry pi to control and track the usage of connected mains devices.  The project is contained within a Flask application with can be found on the localhost at port 8090 when run.  The 7 inch display is optional, and is used to display the webpage with a touchscreen interface, however if the monitor is not used, the web page can be accessed by any device on the network by navigating to https://localhost:8090.  
+
+The web application allows for control over the connected devices and to monitor the energy used by the devices.
 
 ### Running the application
 To run the application clone the project and run the app.py file using Python3 on the Raspberry Pi using this command:
@@ -18,9 +20,9 @@ An installation of Flask
 
 1 x ELEGOO 4 Channel Relay Module.
 
-1 x 7” Raspberry Pi LCD Display,
+1 x 7” Raspberry Pi LCD Display (optional).
 
-1 x Breadboard,
+1 x Breadboard.
 
 
 ###  Pin Numbers and Wiring Diagram
