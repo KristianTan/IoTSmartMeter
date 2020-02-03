@@ -8,7 +8,7 @@ To run the application clone the project and run the app.py file using Python3 o
 python3 app.py
 ```
 
-### prerequisites
+### Prerequisites
 An installation of Python3
 
 An installation of Flask
@@ -21,11 +21,7 @@ An installation of Flask
 1 x 7” Raspberry Pi LCD Display - To display the smart meter style interface.
 
 
-### Wiring diagram and pin numbers
-
-
-![alt text](https://github.com/KristianTan/IoTSmartMeter/blob/master/Wiring%20Diagram.png "Wiring diagram")
-
+###  Pin Numbers and Wiring Diagram
 The 7 inch display should be connected via the ribon cable and the GPIO pins should be attached like so:
 
 7 Inch Display | Raspberry Pi GPIO pin (Board number)
@@ -45,3 +41,6 @@ Relay board | Raspberry Pi GPIO pin (Board number)
  IN3 | 26
  IN4 | 32
  VCC | 2 or 4 (5V)
+
+
+![alt text](https://github.com/KristianTan/IoTSmartMeter/blob/master/Wiring%20Diagram.png "Wiring diagram")
